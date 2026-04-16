@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrainerIQ — Turn Every Session Into a Story Parents Love</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #111009;
+  --ink2:    #3a3830;
+  --ink3:    #7a7568;
+  --sand:    #f8f5ef;
+  --sand2:   #eeebe2;
+  --border:  #e0dbd0;
+  --gold:    #d4920c;
+  --gold2:   #f5b829;
+  --gold-lt: #fdf4dc;
+  --green:   #1a6e50;
+  --green-lt:#e5f5ee;
+  --white:   #ffffff;
+  --r:       14px;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Figtree',sans-serif;
+  background:var(--white);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  height:62px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 2rem;
+}
+.nav-logo {
+  font-family:'Playfair Display',serif;
+  font-size:1.3rem; font-weight:900;
+  color:var(--ink); letter-spacing:-.02em;
+}
+.nav-logo em { color:var(--gold); font-style:normal; }
+.nav-links { display:flex; align-items:center; gap:1.75rem; }
+.nav-links a {
+  font-size:13.5px; font-weight:500; color:var(--ink3);
+  text-decoration:none; transition:color .15s;
+}
+.nav-links a:hover { color:var(--ink); }
+.nav-cta {
+  background:var(--ink); color:#fff;
+  padding:9px 20px; border-radius:8px;
+  font-size:13px; font-weight:700;
+  text-decoration:none; letter-spacing:.01em;
+  transition:all .15s;
+  border:none; cursor:pointer; font-family:'Figtree',sans-serif;
+}
+.nav-cta:hover { background:#2a2820; transform:translateY(-1px); }
+@media(max-width:640px){ .nav-links { display:none; } }
+
+/* ── HERO ── */
+.hero {
+  padding:9rem 1.5rem 5rem;
+  background:var(--ink);
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero-bg-ring {
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(212,146,12,.12);
+  pointer-events:none;
+}
+.ring1 { width:600px; height:600px; top:50%; left:50%; transform:translate(-50%,-50%); }
+.ring2 { width:900px; height:900px; top:50%; left:50%; transform:translate(-50%,-50%); }
+.ring3 { width:1200px; height:1200px; top:50%; left:50%; transform:translate(-50%,-50%); }
+
+.hero-label {
+  display:inline-block;
+  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold); background:rgba(212,146,12,.12);
+  border:1px solid rgba(212,146,12,.25);
+  border-radius:20px; padding:5px 14px;
+  margin-bottom:1.5rem;
+  animation:fadeUp .5s ease both;
+}
+.hero-h1 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.4rem, 6vw, 4rem);
+  font-weight:900;
+  color:#fff;
+  line-height:1.1;
+  letter-spacing:-.03em;
+  max-width:700px; margin:0 auto;
+  animation:fadeUp .55s ease both;
+}
+.hero-h1 em { color:var(--gold2); font-style:italic; }
+.hero-sub {
+  font-size:1.05rem;
+  color:rgba(255,255,255,.5);
+  max-width:480px; margin:1.25rem auto 0;
+  line-height:1.7;
+  animation:fadeUp .6s ease both;
+}
+.hero-actions {
+  display:flex; align-items:center; justify-content:center; gap:.75rem;
+  margin-top:2rem; flex-wrap:wrap;
+  animation:fadeUp .65s ease both;
+}
+.btn-primary {
+  background:var(--gold);
+  color:var(--ink);
+  padding:14px 28px; border-radius:10px;
+  font-size:15px; font-weight:800;
+  text-decoration:none; letter-spacing:.01em;
+  transition:all .15s; border:none; cursor:pointer;
+  font-family:'Figtree',sans-serif;
+  display:inline-block;
+}
+.btn-primary:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,146,12,.3); }
+.btn-ghost-lt {
+  color:rgba(255,255,255,.6); font-size:14px; font-weight:500;
+  text-decoration:none; padding:14px 20px;
+  border:1px solid rgba(255,255,255,.15); border-radius:10px;
+  transition:all .15s; display:inline-block;
+}
+.btn-ghost-lt:hover { color:#fff; border-color:rgba(255,255,255,.3); }
+.hero-proof {
+  font-size:12px; color:rgba(255,255,255,.3);
+  margin-top:1rem;
+  animation:fadeUp .7s ease both;
+}
+.hero-proof span { color:rgba(255,255,255,.5); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── SOCIAL PROOF TICKER ── */
+.ticker {
+  background:var(--gold);
+  padding:.6rem 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.ticker-inner {
+  display:inline-flex; gap:3rem;
+  animation:scroll 22s linear infinite;
+}
+.ticker-inner span {
+  font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink);
+}
+.ticker-inner span::before { content:'⚡ '; }
+@keyframes scroll {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ── PROBLEM SECTION ── */
+.problem {
+  padding:5rem 1.5rem;
+  background:var(--sand);
+  text-align:center;
+}
+.section-kicker { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
+.section-h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.7rem,4vw,2.5rem);
+  font-weight:900; letter-spacing:-.03em;
+  color:var(--ink); line-height:1.2;
+  max-width:580px; margin:0 auto;
+}
+.section-h2 em { color:var(--gold); font-style:italic; }
+.section-sub {
+  font-size:1rem; color:var(--ink3);
+  max-width:480px; margin:1rem auto 0; line-height:1.7;
+}
+
+.pain-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
+  max-width:860px; margin:3rem auto 0;
+}
+@media(max-width:640px){ .pain-grid { grid-template-columns:1fr; } }
+.pain-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); padding:1.5rem;
+  text-align:left;
+}
+.pain-emoji { font-size:1.5rem; margin-bottom:.75rem; }
+.pain-title { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
+.pain-text  { font-size:13.5px; color:var(--ink3); line-height:1.65; }
+
+/* ── HOW IT WORKS ── */
+.how {
+  padding:5rem 1.5rem;
+  background:var(--white);
+  text-align:center;
+}
+.steps {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:0; max-width:800px; margin:3rem auto 0;
+  position:relative;
+}
+.steps::before {
+  content:'';
+  position:absolute;
+  top:28px; left:calc(16.6% + 16px); right:calc(16.6% + 16px);
+  height:1px; background:var(--border);
+}
+@media(max-width:640px){ .steps { grid-template-columns:1fr; gap:2rem; } .steps::before{ display:none; } }
+.step { padding:0 1rem; position:relative; }
+.step-num {
+  width:56px; height:56px; border-radius:50%;
+  background:var(--ink); color:var(--gold);
+  font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  margin:0 auto 1.25rem; position:relative; z-index:1;
+}
+.step-title { font-size:16px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
+.step-text  { font-size:13.5px; color:var(--ink3); line-height:1.65; }
+
+/* ── PRODUCT PREVIEW ── */
+.preview {
+  padding:5rem 1.5rem;
+  background:var(--ink);
+  overflow:hidden;
+}
+.preview-inner { max-width:900px; margin:0 auto; }
+.preview-head { text-align:center; margin-bottom:3rem; }
+.preview-head .section-kicker { color:var(--gold2); }
+.preview-head .section-h2 { color:#fff; }
+.preview-head .section-sub { color:rgba(255,255,255,.45); }
+
+.preview-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+@media(max-width:700px){ .preview-cards { grid-template-columns:1fr; } }
+
+.prev-card {
+  background:#1c1a16; border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r); overflow:hidden;
+}
+.prev-card-hd {
+  padding:.9rem 1.1rem; background:rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:rgba(255,255,255,.4);
+  display:flex; align-items:center; justify-content:space-between;
+}
+.prev-card-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
+.prev-card-body { padding:1.1rem; }
+
+/* Mini report preview */
+.mini-meter-row { display:flex; gap:8px; margin-bottom:.9rem; }
+.mini-meter {
+  flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+  border-radius:8px; padding:.6rem; text-align:center;
+}
+.mini-meter-val { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--gold2); line-height:1; }
+.mini-meter-lbl { font-size:9px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-top:3px; }
+.mini-pill-row { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:.75rem; }
+.mini-pill { padding:3px 8px; border-radius:20px; font-size:10px; font-weight:600; }
+.mp-green { background:rgba(26,110,80,.2); color:#3ecb8a; }
+.mp-teal  { background:rgba(26,104,120,.2); color:#3aaabf; }
+.mini-text { font-size:11px; line-height:1.6; color:rgba(255,255,255,.45); }
+.mini-note { font-size:11px; font-style:italic; color:rgba(255,255,255,.35); border-left:2px solid var(--gold); padding-left:.6rem; margin-top:.65rem; }
+
+/* Mini progress bars */
+.mini-prog { margin-bottom:.5rem; }
+.mini-prog:last-child { margin-bottom:0; }
+.mini-prog-head { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.45); margin-bottom:3px; }
+.mini-prog-track { height:5px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
+.mini-prog-fill { height:100%; border-radius:3px; }
+.mpf-gold  { background:var(--gold); }
+.mpf-green { background:#3ecb8a; }
+.mpf-teal  { background:#3aaabf; }
+
+/* Mini history */
+.mini-hist { display:flex; align-items:center; gap:8px; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.06); }
+.mini-hist:last-child { border-bottom:none; }
+.mh-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+.mh-dot-gold  { background:var(--gold); }
+.mh-dot-green { background:#3ecb8a; }
+.mh-body { flex:1; min-width:0; }
+.mh-name { font-size:11px; font-weight:600; color:rgba(255,255,255,.6); }
+.mh-meta { font-size:10px; color:rgba(255,255,255,.3); }
+.mh-score { font-family:'Playfair Display',serif; font-size:12px; color:var(--gold2); }
+
+/* ── TESTIMONIALS ── */
+.testimonials {
+  padding:5rem 1.5rem;
+  background:var(--sand);
+  text-align:center;
+}
+.testi-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
+  max-width:900px; margin:3rem auto 0;
+}
+@media(max-width:700px){ .testi-grid { grid-template-columns:1fr; } }
+.testi-card {
+  background:var(--white); border:1px solid var(--border);
+  border-radius:var(--r); padding:1.5rem; text-align:left;
+}
+.testi-stars { color:var(--gold); font-size:13px; margin-bottom:.75rem; letter-spacing:2px; }
+.testi-quote {
+  font-family:'Playfair Display',serif;
+  font-size:15px; font-style:italic;
+  color:var(--ink2); line-height:1.7; margin-bottom:1rem;
+}
+.testi-person { display:flex; align-items:center; gap:10px; }
+.testi-av {
+  width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Playfair Display',serif; font-size:14px; font-weight:700;
+  flex-shrink:0;
+}
+.ta-1 { background:var(--gold-lt); color:var(--gold); }
+.ta-2 { background:var(--green-lt); color:var(--green); }
+.ta-3 { background:#f0ecfb; color:#5e3a7a; }
+.testi-name { font-size:13px; font-weight:700; color:var(--ink); }
+.testi-role { font-size:11px; color:var(--ink3); }
+
+/* ── PRICING ── */
+.pricing {
+  padding:5rem 1.5rem;
+  background:var(--white);
+  text-align:center;
+}
+.pricing-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:1.25rem; max-width:860px; margin:3rem auto 0;
+  align-items:start;
+}
+@media(max-width:700px){ .pricing-grid { grid-template-columns:1fr; } }
+.price-card {
+  border:1px solid var(--border); border-radius:var(--r);
+  overflow:hidden; text-align:left;
+  transition:transform .2s, box-shadow .2s;
+}
+.price-card:hover { transform:translateY(-4px); box-shadow:0 12px 36px rgba(17,16,9,.1); }
+.price-card.featured {
+  border-color:var(--gold); border-width:2px;
+  transform:translateY(-6px);
+  box-shadow:0 16px 40px rgba(212,146,12,.18);
+}
+.price-card.featured:hover { transform:translateY(-10px); }
+.price-hd { padding:1.4rem 1.4rem 1rem; background:var(--sand); border-bottom:1px solid var(--border); }
+.price-hd.featured-hd { background:var(--gold-lt); }
+.price-badge {
+  display:inline-block;
+  font-size:10px; font-weight:800; letter-spacing:.07em; text-transform:uppercase;
+  background:var(--gold); color:var(--ink);
+  border-radius:20px; padding:3px 10px; margin-bottom:.6rem;
+}
+.price-name { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:700; color:var(--ink); }
+.price-val {
+  font-family:'Playfair Display',serif;
+  font-size:2rem; font-weight:900; color:var(--ink);
+  line-height:1; margin-top:.6rem;
+}
+.price-val span { font-size:1rem; font-weight:400; color:var(--ink3); font-family:'Figtree',sans-serif; }
+.price-per { font-size:12px; color:var(--ink3); margin-top:4px; }
+.price-body { padding:1.25rem 1.4rem; }
+.price-features { list-style:none; display:flex; flex-direction:column; gap:.6rem; margin-bottom:1.4rem; }
+.price-features li { font-size:13.5px; color:var(--ink2); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+.price-features li::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; margin-top:1px; }
+.price-features li.na { color:var(--ink3); }
+.price-features li.na::before { content:'–'; color:var(--border); }
+.price-btn {
+  display:block; width:100%; padding:11px;
+  text-align:center; border-radius:8px;
+  font-size:14px; font-weight:700; font-family:'Figtree',sans-serif;
+  cursor:pointer; transition:all .15s; text-decoration:none;
+  border:none;
+}
+.pb-ghost { background:var(--sand); color:var(--ink); border:1px solid var(--border); }
+.pb-ghost:hover { background:var(--sand2); }
+.pb-gold  { background:var(--gold); color:var(--ink); }
+.pb-gold:hover { background:var(--gold2); box-shadow:0 4px 16px rgba(212,146,12,.3); }
+.pb-dark  { background:var(--ink); color:#fff; }
+.pb-dark:hover { background:#2a2820; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  padding:6rem 1.5rem;
+  background:var(--ink);
+  text-align:center;
+  position:relative; overflow:hidden;
+}
+.final-cta::before {
+  content:'';
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 0%, rgba(212,146,12,.12) 0%, transparent 65%);
+  pointer-events:none;
+}
+.fcta-h2 {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5vw,3.2rem);
+  font-weight:900; letter-spacing:-.03em;
+  color:#fff; line-height:1.15;
+  max-width:580px; margin:0 auto;
+  position:relative;
+}
+.fcta-h2 em { color:var(--gold2); font-style:italic; }
+.fcta-sub {
+  font-size:1rem; color:rgba(255,255,255,.45);
+  max-width:400px; margin:.9rem auto 0; line-height:1.7;
+  position:relative;
+}
+.fcta-actions { margin-top:2rem; display:flex; flex-direction:column; align-items:center; gap:.75rem; position:relative; }
+.fcta-proof { font-size:12px; color:rgba(255,255,255,.25); }
+
+/* ── FOOTER ── */
+footer {
+  background:var(--ink); border-top:1px solid rgba(255,255,255,.07);
+  padding:2rem 1.5rem;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:1rem;
+}
+.footer-logo {
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem; font-weight:900; color:rgba(255,255,255,.5);
+}
+.footer-logo em { color:var(--gold); font-style:normal; }
+.footer-links { display:flex; gap:1.5rem; }
+.footer-links a { font-size:12px; color:rgba(255,255,255,.3); text-decoration:none; transition:color .15s; }
+.footer-links a:hover { color:rgba(255,255,255,.6); }
+
+/* ── WAITLIST MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.7);
+  z-index:1000; display:flex; align-items:center; justify-content:center;
+  padding:1rem; opacity:0; pointer-events:none; transition:opacity .2s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.modal {
+  background:#fff; border-radius:20px;
+  padding:2.5rem 2rem; max-width:440px; width:100%;
+  transform:translateY(20px); transition:transform .25s;
+  position:relative;
+}
+.modal-overlay.open .modal { transform:translateY(0); }
+.modal-close {
+  position:absolute; top:1rem; right:1rem;
+  width:32px; height:32px; border-radius:50%;
+  background:var(--sand); border:none; cursor:pointer;
+  font-size:14px; display:flex; align-items:center; justify-content:center;
+  color:var(--ink3); transition:all .12s;
+}
+.modal-close:hover { background:var(--sand2); color:var(--ink); }
+.modal-eyebrow { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; }
+.modal-h { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900; color:var(--ink); letter-spacing:-.02em; line-height:1.2; margin-bottom:.4rem; }
+.modal-sub { font-size:13.5px; color:var(--ink3); line-height:1.65; margin-bottom:1.5rem; }
+.modal-field { margin-bottom:.75rem; }
+.modal-field label { display:block; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink3); margin-bottom:4px; }
+.modal-field input, .modal-field select {
+  width:100%; padding:10px 13px;
+  border:1px solid var(--border); border-radius:9px;
+  font-family:'Figtree',sans-serif; font-size:14px; color:var(--ink);
+  background:var(--sand); outline:none; transition:border-color .15s, box-shadow .15s;
+  -webkit-appearance:none;
+}
+.modal-field input:focus, .modal-field select:focus {
+  border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,146,12,.1); background:#fff;
+}
+.modal-submit {
+  width:100%; padding:13px; margin-top:.25rem;
+  background:var(--gold); color:var(--ink);
+  border:none; border-radius:9px;
+  font-family:'Figtree',sans-serif; font-size:15px; font-weight:800;
+  cursor:pointer; transition:all .15s; letter-spacing:.01em;
+}
+.modal-submit:hover { background:var(--gold2); }
+.modal-fine { font-size:11px; color:var(--ink3); text-align:center; margin-top:.75rem; }
+
+/* Success state */
+.modal-success { text-align:center; padding:1rem 0; }
+.success-icon { font-size:3rem; margin-bottom:1rem; }
+.success-h { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--ink); margin-bottom:.5rem; }
+.success-sub { font-size:14px; color:var(--ink3); line-height:1.65; }
+
+/* Utility */
+.max-w { max-width:900px; margin:0 auto; }
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">Trainer<em>IQ</em></div>
+  <div class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#preview">Product</a>
+    <a href="#pricing">Pricing</a>
+  </div>
+  <button class="nav-cta" onclick="openModal()">Get early access</button>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-ring ring1"></div>
+  <div class="hero-bg-ring ring2"></div>
+  <div class="hero-bg-ring ring3"></div>
+
+  <div class="hero-label">For basketball trainers</div>
+
+  <h1 class="hero-h1">
+    Turn every session into a story <em>parents love.</em>
+  </h1>
+  <p class="hero-sub">
+    TrainerIQ uses AI to make post-session assessments faster and more professional — so parents see the value you deliver, every single workout.
+  </p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="openModal()">Get early access — it's free</button>
+    <a href="#how" class="btn-ghost-lt">See how it works</a>
+  </div>
+  <div class="hero-proof">
+    <span>No credit card required</span> &nbsp;·&nbsp; <span>30-second setup</span> &nbsp;·&nbsp; <span>Cancel anytime</span>
+  </div>
+</section>
+
+<!-- ── TICKER ── -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>2-minute reports per athlete</span>
+    <span>Parent open rate over 90%</span>
+    <span>Works for 1-on-1 and group sessions</span>
+    <span>AI-powered · trainer-controlled</span>
+    <span>Builds loyalty and referrals</span>
+    <span>2-minute reports per athlete</span>
+    <span>Parent open rate over 90%</span>
+    <span>Works for 1-on-1 and group sessions</span>
+    <span>AI-powered · trainer-controlled</span>
+    <span>Builds loyalty and referrals</span>
+  </div>
+</div>
+
+<!-- ── PROBLEM ── -->
+<section class="problem">
+  <div class="max-w">
+    <div class="section-kicker">The real problem</div>
+    <h2 class="section-h2">Parents pay premium prices. They can't see <em>what they're paying for.</em></h2>
+    <p class="section-sub">You're doing incredible work in the gym. But parents only see what their kid tells them — which is usually nothing.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-emoji">😤</div>
+        <div class="pain-title">Parents get anxious</div>
+        <div class="pain-text">Without visibility into sessions, parents start questioning if training is working — and whether the investment is worth it.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-emoji">📉</div>
+        <div class="pain-title">Clients quietly churn</div>
+        <div class="pain-text">Families who don't feel connected to the training journey are the first to pause sessions when budgets get tight.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-emoji">🗣️</div>
+        <div class="pain-title">Referrals don't happen</div>
+        <div class="pain-text">Parents who are wowed by your professionalism become your best marketing. Parents in the dark stay quiet.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="how" id="how">
+  <div class="max-w">
+    <div class="section-kicker">How it works</div>
+    <h2 class="section-h2">Three steps. Two minutes. One <em>delighted</em> parent.</h2>
+    <p class="section-sub">TrainerIQ fits into your workflow — not the other way around.</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Fill the quick form</div>
+        <div class="step-text">Select skills worked on, rate effort and focus, tag strengths and areas to develop. No typing required — takes under 2 minutes per athlete.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">AI powers the report</div>
+        <div class="step-text">TrainerIQ turns your assessment into a warm, professional parent report in seconds — your observations, your voice, structured and polished automatically. Review and publish in one tap.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Parents see everything</div>
+        <div class="step-text">Families get notified and log into a beautiful portal showing session reports, skill progress over time, and at-home drills. They feel like VIPs.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRODUCT PREVIEW ── -->
+<section class="preview" id="preview">
+  <div class="preview-inner">
+    <div class="preview-head">
+      <div class="section-kicker">The product</div>
+      <h2 class="section-h2" style="color:#fff">Everything you need. <em style="color:var(--gold2)">Nothing you don't.</em></h2>
+      <p class="section-sub">Three views. Trainer dashboard, session report, parent portal.</p>
+    </div>
+
+    <div class="preview-cards">
+
+      <!-- Session report preview -->
+      <div class="prev-card">
+        <div class="prev-card-hd">
+          Session Report
+          <div class="prev-card-dot"></div>
+        </div>
+        <div class="prev-card-body">
+          <div class="mini-meter-row">
+            <div class="mini-meter">
+              <div class="mini-meter-val">5</div>
+              <div class="mini-meter-lbl">Effort</div>
+            </div>
+            <div class="mini-meter">
+              <div class="mini-meter-val">4</div>
+              <div class="mini-meter-lbl">Focus</div>
+            </div>
+          </div>
+          <div class="mini-pill-row">
+            <span class="mini-pill mp-green">Pull-up jumper</span>
+            <span class="mini-pill mp-green">Footwork</span>
+            <span class="mini-pill mp-teal">Weak hand ↑</span>
+          </div>
+          <div class="mini-text">Marcus had a breakthrough with his pull-up off the dribble — his footwork is clicking in a way that's creating clean looks every time.</div>
+          <div class="mini-note">"He brought a different energy today. We're in a great place." — Darryl R.</div>
+        </div>
+      </div>
+
+      <!-- Progress preview -->
+      <div class="prev-card">
+        <div class="prev-card-hd">
+          Skill Progress
+          <div class="prev-card-dot" style="background:#3ecb8a"></div>
+        </div>
+        <div class="prev-card-body">
+          <div class="mini-prog">
+            <div class="mini-prog-head"><span>Shooting</span><span style="color:var(--gold2)">82%</span></div>
+            <div class="mini-prog-track"><div class="mini-prog-fill mpf-gold" style="width:82%"></div></div>
+          </div>
+          <div class="mini-prog">
+            <div class="mini-prog-head"><span>Footwork</span><span style="color:#3ecb8a">70%</span></div>
+            <div class="mini-prog-track"><div class="mini-prog-fill mpf-green" style="width:70%"></div></div>
+          </div>
+          <div class="mini-prog" style="margin-bottom:.9rem">
+            <div class="mini-prog-head"><span>Ball handling</span><span style="color:#3aaabf">55%</span></div>
+            <div class="mini-prog-track"><div class="mini-prog-fill mpf-teal" style="width:55%"></div></div>
+          </div>
+          <div class="mini-text">Built from 18 sessions across 3 months of training.</div>
+        </div>
+      </div>
+
+      <!-- Client roster preview -->
+      <div class="prev-card">
+        <div class="prev-card-hd">
+          Client Roster
+          <div class="prev-card-dot" style="background:#3aaabf"></div>
+        </div>
+        <div class="prev-card-body">
+          <div class="mini-hist">
+            <div class="mh-dot mh-dot-gold"></div>
+            <div class="mh-body">
+              <div class="mh-name">Marcus Johnson</div>
+              <div class="mh-meta">Shooting · 18 sessions</div>
+            </div>
+            <div class="mh-score">5/5</div>
+          </div>
+          <div class="mini-hist">
+            <div class="mh-dot mh-dot-green"></div>
+            <div class="mh-body">
+              <div class="mh-name">Ava Thompson</div>
+              <div class="mh-meta">Ball handling · 11 sessions</div>
+            </div>
+            <div class="mh-score">4/5</div>
+          </div>
+          <div class="mini-hist">
+            <div class="mh-dot" style="background:#3aaabf"></div>
+            <div class="mh-body">
+              <div class="mh-name">Tyler Brooks</div>
+              <div class="mh-meta">Full workout · 24 sessions</div>
+            </div>
+            <div class="mh-score">5/5</div>
+          </div>
+          <div class="mini-hist">
+            <div class="mh-dot" style="background:#c080ff"></div>
+            <div class="mh-body">
+              <div class="mh-name">Jordan Kim</div>
+              <div class="mh-meta">Post moves · 9 sessions</div>
+            </div>
+            <div class="mh-score">4/5</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testimonials">
+  <div class="max-w">
+    <div class="section-kicker">Early feedback</div>
+    <h2 class="section-h2">Trainers love it. Parents <em>won't stop talking about it.</em></h2>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I sent the first report and the parent texted me within 10 minutes saying it was the best thing any trainer had ever done for their family. I've gotten two referrals from that one report."</div>
+        <div class="testi-person">
+          <div class="testi-av ta-1">JM</div>
+          <div>
+            <div class="testi-name">James M.</div>
+            <div class="testi-role">AAU trainer · Atlanta, GA</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"I used to dread writing session updates. Now I do it right after every workout while I'm still in the gym. Takes me less time than packing my bag."</div>
+        <div class="testi-person">
+          <div class="testi-av ta-2">RP</div>
+          <div>
+            <div class="testi-name">Rachel P.</div>
+            <div class="testi-role">Private trainer · Chicago, IL</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">"Parents have started asking their kids to actually do the home drills because they're in the report. The buy-in has gone through the roof for my whole program."</div>
+        <div class="testi-person">
+          <div class="testi-av ta-3">DW</div>
+          <div>
+            <div class="testi-name">DeShawn W.</div>
+            <div class="testi-role">Skills trainer · Houston, TX</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="pricing" id="pricing">
+  <div class="max-w">
+    <div class="section-kicker">Simple pricing</div>
+    <h2 class="section-h2">Pay for what you use. <em>Grow when you're ready.</em></h2>
+    <p class="section-sub">Start free during beta. No contracts, no setup fees.</p>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-hd">
+          <div class="price-name">Solo</div>
+          <div class="price-val">$29<span>/mo</span></div>
+          <div class="price-per">per trainer · up to 8 athletes</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>Unlimited session reports</li>
+            <li>1-on-1 &amp; group sessions</li>
+            <li>Parent portal access</li>
+            <li>AI-powered session reports</li>
+            <li>Skill progress tracking</li>
+            <li class="na">Custom branding</li>
+            <li class="na">Multi-trainer access</li>
+          </ul>
+          <button class="price-btn pb-ghost" onclick="openModal()">Get started free</button>
+        </div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-hd featured-hd">
+          <div class="price-badge">Most popular</div>
+          <div class="price-name">Pro</div>
+          <div class="price-val">$59<span>/mo</span></div>
+          <div class="price-per">per trainer · unlimited athletes</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>Everything in Solo</li>
+            <li>Unlimited athletes</li>
+            <li>Custom trainer branding</li>
+            <li>Parent messaging</li>
+            <li>Session history archive</li>
+            <li>Weekly progress summaries</li>
+            <li class="na">Multi-trainer access</li>
+          </ul>
+          <button class="price-btn pb-gold" onclick="openModal()">Get started free</button>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-hd">
+          <div class="price-name">Academy</div>
+          <div class="price-val">$149<span>/mo</span></div>
+          <div class="price-per">per program · up to 6 trainers</div>
+        </div>
+        <div class="price-body">
+          <ul class="price-features">
+            <li>Everything in Pro</li>
+            <li>Up to 6 trainer accounts</li>
+            <li>Program-level dashboard</li>
+            <li>White-label portal</li>
+            <li>Priority support</li>
+            <li>Custom skill taxonomies</li>
+            <li>Bulk report generation</li>
+          </ul>
+          <button class="price-btn pb-dark" onclick="openModal()">Contact us</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FINAL CTA ── -->
+<section class="final-cta">
+  <h2 class="fcta-h2">Your next client is a <em>referral away.</em></h2>
+  <p class="fcta-sub">Join the trainers making parents feel like partners in their athlete's development.</p>
+  <div class="fcta-actions">
+    <button class="btn-primary" onclick="openModal()" style="font-size:16px; padding:16px 36px;">Get early access — free</button>
+    <div class="fcta-proof">Beta is free. Launching to the public in Summer 2026.</div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Trainer<em>IQ</em></div>
+  <div class="footer-links">
+    <a href="#">Privacy</a>
+    <a href="#">Terms</a>
+    <a href="#">Contact</a>
+  </div>
+</footer>
+
+<!-- ── WAITLIST MODAL ── -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div id="modal-form">
+      <div class="modal-eyebrow">Early access — free beta</div>
+      <div class="modal-h">Join TrainerIQ</div>
+      <div class="modal-sub">We're onboarding trainers now. Drop your info and we'll get you set up within 24 hours.</div>
+
+      <div class="modal-field">
+        <label>Your name</label>
+        <input type="text" id="m-name" placeholder="First Last">
+      </div>
+      <div class="modal-field">
+        <label>Email address</label>
+        <input type="email" id="m-email" placeholder="you@example.com">
+      </div>
+      <div class="modal-field">
+        <label>How many athletes do you train?</label>
+        <select id="m-size">
+          <option value="">Select…</option>
+          <option>1–5 athletes</option>
+          <option>6–15 athletes</option>
+          <option>16–30 athletes</option>
+          <option>30+ athletes / program</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>City / state</label>
+        <input type="text" id="m-city" placeholder="e.g. Atlanta, GA">
+      </div>
+
+      <button class="modal-submit" onclick="submitModal()">Reserve my spot →</button>
+      <div class="modal-fine">Free during beta. No credit card. We'll reach out within 24 hours.</div>
+    </div>
+
+    <div id="modal-success" class="modal-success" style="display:none">
+      <div class="success-icon">🏀</div>
+      <div class="success-h">You're on the list.</div>
+      <div class="success-sub">We'll reach out within 24 hours to get your account set up. Tell a trainer friend — they'll thank you later.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+function submitModal() {
+  const name  = document.getElementById('m-name').value.trim();
+  const email = document.getElementById('m-email').value.trim();
+  const size  = document.getElementById('m-size').value;
+  if (!name)  { alert('Please enter your name.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+  if (!size)  { alert('Please select how many athletes you train.'); return; }
+  document.getElementById('modal-form').style.display = 'none';
+  document.getElementById('modal-success').style.display = 'block';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>

@@ -433,58 +433,7 @@ footer {
 .footer-links a { font-size:12px; color:rgba(255,255,255,.3); text-decoration:none; transition:color .15s; }
 .footer-links a:hover { color:rgba(255,255,255,.6); }
 
-/* ── WAITLIST MODAL ── */
-.modal-overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,.7);
-  z-index:1000; display:flex; align-items:center; justify-content:center;
-  padding:1rem; opacity:0; pointer-events:none; transition:opacity .2s;
-}
-.modal-overlay.open { opacity:1; pointer-events:all; }
-.modal {
-  background:#fff; border-radius:20px;
-  padding:2.5rem 2rem; max-width:440px; width:100%;
-  transform:translateY(20px); transition:transform .25s;
-  position:relative;
-}
-.modal-overlay.open .modal { transform:translateY(0); }
-.modal-close {
-  position:absolute; top:1rem; right:1rem;
-  width:32px; height:32px; border-radius:50%;
-  background:var(--sand); border:none; cursor:pointer;
-  font-size:14px; display:flex; align-items:center; justify-content:center;
-  color:var(--ink3); transition:all .12s;
-}
-.modal-close:hover { background:var(--sand2); color:var(--ink); }
-.modal-eyebrow { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; }
-.modal-h { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:900; color:var(--ink); letter-spacing:-.02em; line-height:1.2; margin-bottom:.4rem; }
-.modal-sub { font-size:13.5px; color:var(--ink3); line-height:1.65; margin-bottom:1.5rem; }
-.modal-field { margin-bottom:.75rem; }
-.modal-field label { display:block; font-size:11px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--ink3); margin-bottom:4px; }
-.modal-field input, .modal-field select {
-  width:100%; padding:10px 13px;
-  border:1px solid var(--border); border-radius:9px;
-  font-family:'Figtree',sans-serif; font-size:14px; color:var(--ink);
-  background:var(--sand); outline:none; transition:border-color .15s, box-shadow .15s;
-  -webkit-appearance:none;
-}
-.modal-field input:focus, .modal-field select:focus {
-  border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,146,12,.1); background:#fff;
-}
-.modal-submit {
-  width:100%; padding:13px; margin-top:.25rem;
-  background:var(--gold); color:var(--ink);
-  border:none; border-radius:9px;
-  font-family:'Figtree',sans-serif; font-size:15px; font-weight:800;
-  cursor:pointer; transition:all .15s; letter-spacing:.01em;
-}
-.modal-submit:hover { background:var(--gold2); }
-.modal-fine { font-size:11px; color:var(--ink3); text-align:center; margin-top:.75rem; }
 
-/* Success state */
-.modal-success { text-align:center; padding:1rem 0; }
-.success-icon { font-size:3rem; margin-bottom:1rem; }
-.success-h { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:900; color:var(--ink); margin-bottom:.5rem; }
-.success-sub { font-size:14px; color:var(--ink3); line-height:1.65; }
 
 /* Utility */
 .max-w { max-width:900px; margin:0 auto; }
@@ -500,7 +449,7 @@ footer {
     <a href="#preview">Product</a>
     <a href="#pricing">Pricing</a>
   </div>
-  <button class="nav-cta" onclick="openModal()">Get early access</button>
+  <button class="nav-cta" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Get early access</button>
 </nav>
 
 <!-- ── HERO ── -->
@@ -518,7 +467,7 @@ footer {
     TrainerIQ uses AI to make post-session assessments faster and more professional — so parents see the value you deliver, every single workout.
   </p>
   <div class="hero-actions">
-    <button class="btn-primary" onclick="openModal()">Get early access — it's free</button>
+    <button class="btn-primary" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Get early access — it's free</button>
     <a href="#how" class="btn-ghost-lt">See how it works</a>
   </div>
   <div class="hero-proof">
@@ -772,7 +721,7 @@ footer {
             <li class="na">Custom branding</li>
             <li class="na">Multi-trainer access</li>
           </ul>
-          <button class="price-btn pb-ghost" onclick="openModal()">Get started free</button>
+          <button class="price-btn pb-ghost" data-tally-open="Ekb11X" data-tally-overlay="1">Get started free</button>
         </div>
       </div>
 
@@ -793,7 +742,7 @@ footer {
             <li>Weekly progress summaries</li>
             <li class="na">Multi-trainer access</li>
           </ul>
-          <button class="price-btn pb-gold" onclick="openModal()">Get started free</button>
+          <button class="price-btn pb-gold" data-tally-open="Ekb11X" data-tally-overlay="1">Get started free</button>
         </div>
       </div>
 
@@ -813,7 +762,7 @@ footer {
             <li>Custom skill taxonomies</li>
             <li>Bulk report generation</li>
           </ul>
-          <button class="price-btn pb-dark" onclick="openModal()">Contact us</button>
+          <button class="price-btn pb-dark" data-tally-open="Ekb11X" data-tally-overlay="1">Contact us</button>
         </div>
       </div>
 
@@ -826,7 +775,7 @@ footer {
   <h2 class="fcta-h2">Your next client is a <em>referral away.</em></h2>
   <p class="fcta-sub">Join the trainers making parents feel like partners in their athlete's development.</p>
   <div class="fcta-actions">
-    <button class="btn-primary" onclick="openModal()" style="font-size:16px; padding:16px 36px;">Get early access — free</button>
+    <button class="btn-primary" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave" style="font-size:16px; padding:16px 36px;">Get early access — free</button>
     <div class="fcta-proof">Beta is free. Launching to the public in Summer 2026.</div>
   </div>
 </section>
@@ -841,74 +790,6 @@ footer {
   </div>
 </footer>
 
-<!-- ── WAITLIST MODAL ── -->
-<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-
-    <div id="modal-form">
-      <div class="modal-eyebrow">Early access — free beta</div>
-      <div class="modal-h">Join TrainerIQ</div>
-      <div class="modal-sub">We're onboarding trainers now. Drop your info and we'll get you set up within 24 hours.</div>
-
-      <div class="modal-field">
-        <label>Your name</label>
-        <input type="text" id="m-name" placeholder="First Last">
-      </div>
-      <div class="modal-field">
-        <label>Email address</label>
-        <input type="email" id="m-email" placeholder="you@example.com">
-      </div>
-      <div class="modal-field">
-        <label>How many athletes do you train?</label>
-        <select id="m-size">
-          <option value="">Select…</option>
-          <option>1–5 athletes</option>
-          <option>6–15 athletes</option>
-          <option>16–30 athletes</option>
-          <option>30+ athletes / program</option>
-        </select>
-      </div>
-      <div class="modal-field">
-        <label>City / state</label>
-        <input type="text" id="m-city" placeholder="e.g. Atlanta, GA">
-      </div>
-
-      <button class="modal-submit" onclick="submitModal()">Reserve my spot →</button>
-      <div class="modal-fine">Free during beta. No credit card. We'll reach out within 24 hours.</div>
-    </div>
-
-    <div id="modal-success" class="modal-success" style="display:none">
-      <div class="success-icon">🏀</div>
-      <div class="success-h">You're on the list.</div>
-      <div class="success-sub">We'll reach out within 24 hours to get your account set up. Tell a trainer friend — they'll thank you later.</div>
-    </div>
-  </div>
-</div>
-
-<script>
-function openModal() {
-  document.getElementById('modal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal() {
-  document.getElementById('modal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function handleOverlayClick(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
-}
-function submitModal() {
-  const name  = document.getElementById('m-name').value.trim();
-  const email = document.getElementById('m-email').value.trim();
-  const size  = document.getElementById('m-size').value;
-  if (!name)  { alert('Please enter your name.'); return; }
-  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
-  if (!size)  { alert('Please select how many athletes you train.'); return; }
-  document.getElementById('modal-form').style.display = 'none';
-  document.getElementById('modal-success').style.display = 'block';
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-</script>
+<script async src="https://tally.so/widgets/embed.js"></script>
 </body>
 </html>

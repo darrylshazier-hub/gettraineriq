@@ -332,7 +332,7 @@ function incrementSessions() {
 // ─────────────────────────────────────────────────
 function buildURL(athlete) {
   const p = new URLSearchParams({
-    trainer_code: CODE,
+    trainer_name: TRAINER_CODES[CODE],
     athlete_name: `${athlete.first} ${athlete.last}`,
     age:          athlete.age,
     parent_email: athlete.email || ''

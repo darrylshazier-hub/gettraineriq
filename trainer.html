@@ -85,11 +85,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--i
 .athlete-name { font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .athlete-meta { font-size: 11px; color: var(--ink3); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .athlete-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
-.athlete-arrow { font-size: 14px; color: var(--border); transition: color .15s, transform .15s; }
+.athlete-arrow { font-size: 14px; color: var(--border); transition: color .15s, transform .15s; flex-shrink: 0; }
 .athlete-card:hover .athlete-arrow { color: var(--gold); transform: translateX(2px); }
-.delete-btn { font-size: 10px; color: var(--ink3); background: none; border: none; cursor: pointer; padding: 2px 4px; border-radius: 4px; transition: all .12s; opacity: 0; }
-.athlete-card:hover .delete-btn { opacity: 1; }
-.delete-btn:hover { background: var(--red-lt); color: var(--red); }
+.card-actions { display: flex; gap: 4px; opacity: 0; transition: opacity .15s; flex-shrink: 0; }
+.athlete-card:hover .card-actions { opacity: 1; }
+.card-action-btn { font-size: 10px; font-weight: 600; padding: 4px 8px; border-radius: 5px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all .12s; line-height: 1; }
+.btn-edit { background: var(--gold-lt); color: var(--gold); }
+.btn-edit:hover { background: var(--gold); color: #fff; }
+.btn-del  { background: var(--red-lt);  color: var(--red); }
+.btn-del:hover  { background: var(--red);  color: #fff; }
 
 /* ── EMPTY STATES ── */
 .empty-state { text-align: center; padding: 3rem 1.5rem; background: var(--surface); border: 1.5px dashed var(--border); border-radius: var(--r); display: none; grid-column: 1 / -1; }
@@ -374,19 +378,24 @@ function renderAthletes(list) {
   }
 
   grid.innerHTML = list.map((a, i) => {
-    const realIdx = roster.indexOf(a);
+    const realIdx = roster.findIndex(r => r.first === a.first && r.last === a.last && r.email === a.email);
     return `
-    <a class="athlete-card" href="${buildURL(a)}" target="_blank" onclick="incrementSessions()">
-      <div class="athlete-av">${getInitials(a.first, a.last)}</div>
-      <div class="athlete-info">
-        <div class="athlete-name">${a.first} ${a.last}</div>
-        <div class="athlete-meta">${a.age}${a.email ? ' · ' + a.email : ''}</div>
-      </div>
-      <div class="athlete-right">
+    <div class="athlete-card" style="cursor:default;">
+      <a href="${buildURL(a)}" target="_blank" onclick="incrementSessions()" style="display:flex;align-items:center;gap:12px;flex:1;text-decoration:none;min-width:0;">
+        <div class="athlete-av">${getInitials(a.first, a.last)}</div>
+        <div class="athlete-info">
+          <div class="athlete-name">${a.first} ${a.last}</div>
+          <div class="athlete-meta">${a.age}${a.email ? ' · ' + a.email : ''}</div>
+        </div>
+      </a>
+      <div class="athlete-right" style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0;">
         <div class="athlete-arrow">→</div>
-        <button class="delete-btn" onclick="deleteAthlete(event, ${realIdx})">✕ remove</button>
+        <div class="card-actions">
+          <button class="card-action-btn btn-edit" onclick="openEditModal(event, ${realIdx})">✏️ Edit</button>
+          <button class="card-action-btn btn-del"  onclick="deleteAthlete(event, ${realIdx})">✕ Remove</button>
+        </div>
       </div>
-    </a>`;
+    </div>`;
   }).join('');
 }
 
@@ -400,6 +409,9 @@ function filterAthletes(q) {
 
 // ─────────────────────────────────────────────────
 //  ADD / DELETE ATHLETES
+// ─────────────────────────────────────────────────
+// ─────────────────────────────────────────────────
+//  ADD / EDIT / DELETE ATHLETES
 // ─────────────────────────────────────────────────
 function addAthlete() {
   const first = document.getElementById('m-first').value.trim();
@@ -431,8 +443,48 @@ function deleteAthlete(e, idx) {
   renderAthletes(roster);
 }
 
+// Edit state
+let editingIdx = -1;
+
+function openEditModal(e, idx) {
+  e.preventDefault();
+  e.stopPropagation();
+  editingIdx = idx;
+  const roster = loadRoster();
+  const a = roster[idx];
+  document.getElementById('e-first').value = a.first;
+  document.getElementById('e-last').value  = a.last;
+  document.getElementById('e-age').value   = a.age;
+  document.getElementById('e-email').value = a.email || '';
+  document.getElementById('edit-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('e-first').focus(), 200);
+}
+
+function saveEdit() {
+  const first = document.getElementById('e-first').value.trim();
+  const last  = document.getElementById('e-last').value.trim();
+  const age   = document.getElementById('e-age').value;
+  const email = document.getElementById('e-email').value.trim();
+
+  if (!first) { alert('Please enter the athlete\'s first name.'); return; }
+  if (!last)  { alert('Please enter the athlete\'s last name.'); return; }
+
+  const roster = loadRoster();
+  roster[editingIdx] = { first, last, age: age || 'Age not set', email };
+  saveRoster(roster);
+  renderAthletes(roster);
+  closeEditModal();
+}
+
+function closeEditModal() {
+  document.getElementById('edit-modal').classList.remove('open');
+  document.body.style.overflow = '';
+  editingIdx = -1;
+}
+
 // ─────────────────────────────────────────────────
-//  MODAL
+//  MODALS
 // ─────────────────────────────────────────────────
 function openModal() {
   document.getElementById('modal').classList.add('open');
@@ -446,9 +498,11 @@ function closeModal() {
 function handleOverlay(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
+function handleEditOverlay(e) {
+  if (e.target === document.getElementById('edit-modal')) closeEditModal();
+}
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-  if (e.key === 'Enter' && document.getElementById('modal').classList.contains('open')) addAthlete();
+  if (e.key === 'Escape') { closeModal(); closeEditModal(); }
 });
 
 // ─────────────────────────────────────────────────
@@ -481,5 +535,39 @@ function init() {
 
 init();
 </script>
+
+<!-- EDIT ATHLETE MODAL -->
+<div class="modal-overlay" id="edit-modal" onclick="handleEditOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeEditModal()">✕</button>
+    <div class="modal-title">Edit athlete</div>
+    <div class="modal-sub">Update this athlete's details. Changes save immediately to your roster.</div>
+    <div class="modal-field">
+      <label>First name</label>
+      <input type="text" id="e-first" placeholder="e.g. Jordan">
+    </div>
+    <div class="modal-field">
+      <label>Last name</label>
+      <input type="text" id="e-last" placeholder="e.g. Smith">
+    </div>
+    <div class="modal-field">
+      <label>Age / division</label>
+      <select id="e-age">
+        <option value="">Select…</option>
+        <option>6-8 yrs (beginner)</option>
+        <option>9-11 yrs (developing)</option>
+        <option>12-14 (intermediate)</option>
+        <option>15-17 (advanced)</option>
+        <option>18+ (elite)</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Parent email</label>
+      <input type="email" id="e-email" placeholder="parent@email.com">
+    </div>
+    <button class="modal-submit" onclick="saveEdit()">Save changes →</button>
+  </div>
+</div>
+
 </body>
 </html>

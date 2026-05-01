@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrainerIQ — Submit Session Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Literata:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:      #111009;
+  --ink2:     #3a3830;
+  --ink3:     #7a7568;
+  --bg:       #f7f4ee;
+  --bg2:      #efece4;
+  --surface:  #ffffff;
+  --border:   #e0dbd0;
+  --gold:     #c8890a;
+  --gold2:    #f0b429;
+  --gold-lt:  #fdf4dc;
+  --green:    #1a6e50;
+  --green-lt: #e5f5ee;
+  --r: 16px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: .05em;
+  color: #fff;
+}
+.logo span { color: var(--gold2); }
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-pill {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.45);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 4px 12px;
+}
+.back-link {
+  font-size: 12px;
+  color: rgba(255,255,255,.4);
+  text-decoration: none;
+  transition: color .15s;
+}
+.back-link:hover { color: rgba(255,255,255,.7); }
+
+/* ── HERO STRIP ── */
+.hero {
+  background: var(--ink);
+  padding: 3.5rem 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,137,10,.15) 0%, transparent 65%);
+  top: -100px; right: -100px;
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  position: relative;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: .6rem;
+  animation: fadeUp .4s ease both;
+}
+.hero-title {
+  font-family: 'Literata', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  margin-bottom: .75rem;
+  animation: fadeUp .45s ease both;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--gold2);
+}
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.5);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  animation: fadeUp .5s ease both;
+}
+
+/* Steps strip */
+.steps-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255,255,255,.08);
+  animation: fadeUp .55s ease both;
+}
+.step-cell {
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.step-cell:last-child { border-right: none; }
+.step-n {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  color: var(--gold2);
+  opacity: .3;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.step-text {}
+.step-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 2px;
+}
+.step-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.5;
+}
+@media(max-width: 600px) {
+  .steps-strip { grid-template-columns: 1fr; }
+  .step-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+  .step-cell:last-child { border-bottom: none; }
+}
+
+/* ── MAIN CONTENT ── */
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 5rem;
+}
+
+/* ── PROMISE BAR ── */
+.promise-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 2rem;
+  animation: fadeUp .6s ease both;
+}
+.promise-cell {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: .85rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.promise-icon { font-size: 1.2rem; flex-shrink: 0; }
+.promise-text { font-size: 12px; color: var(--ink2); line-height: 1.45; }
+.promise-text strong { color: var(--ink); font-weight: 600; display: block; }
+@media(max-width: 560px) { .promise-bar { grid-template-columns: 1fr; } }
+
+/* ── FORM CARD ── */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(17,16,9,.06), 0 8px 32px rgba(17,16,9,.08);
+  animation: fadeUp .65s ease both;
+}
+
+.form-card-header {
+  padding: 1.25rem 1.5rem;
+  background: #faf8f3;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.fch-left {}
+.fch-title {
+  font-family: 'Literata', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.fch-sub { font-size: 12px; color: var(--ink3); }
+.fch-badge {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  background: var(--green-lt);
+  color: var(--green);
+  border: 1px solid rgba(26,110,80,.15);
+  border-radius: 20px;
+  padding: 4px 12px;
+  flex-shrink: 0;
+}
+
+.form-embed-wrap {
+  padding: 0;
+  position: relative;
+}
+
+/* Loading state */
+.form-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  gap: 1rem;
+}
+.loading-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.loading-text {
+  font-size: 13px;
+  color: var(--ink3);
+}
+
+/* The iframe */
+.form-iframe {
+  width: 100%;
+  min-height: 900px;
+  border: none;
+  display: none;
+  background: transparent;
+}
+
+/* ── TURNAROUND PROMISE ── */
+.turnaround {
+  margin-top: 1.25rem;
+  background: var(--gold-lt);
+  border: 1px solid rgba(200,137,10,.2);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  animation: fadeUp .7s ease both;
+}
+.ta-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+.ta-text {}
+.ta-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.ta-desc {
+  font-size: 12px;
+  color: var(--ink2);
+  line-height: 1.6;
+}
+
+/* ── CONTACT LINE ── */
+.contact-line {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 13px;
+  color: var(--ink3);
+  animation: fadeUp .75s ease both;
+}
+.contact-line a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+}
+.contact-line a:hover { color: var(--gold2); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: .05em;
+  color: rgba(255,255,255,.35);
+}
+.footer-logo span { color: var(--gold); }
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,.2);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">Trainer<span>IQ</span></div>
+  <div class="header-right">
+    <div class="header-pill">Trainer Portal</div>
+    <a href="/" class="back-link">← Back to site</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Session report</div>
+    <h1 class="hero-title">Two minutes.<br><em>One report parents love.</em></h1>
+    <p class="hero-sub">Fill this out right after your session while it's fresh. We handle the rest — your report will be ready to send to parents within the hour.</p>
+
+    <div class="steps-strip">
+      <div class="step-cell">
+        <div class="step-n">1</div>
+        <div class="step-text">
+          <div class="step-label">You fill this form</div>
+          <div class="step-desc">Skill tags, ratings, a quick personal note. Under 2 minutes.</div>
+        </div>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">2</div>
+        <div class="step-text">
+          <div class="step-label">We build the report</div>
+          <div class="step-desc">Professional, specific, warm. Back to you within the hour.</div>
+        </div>
+      </div>
+      <div class="step-cell">
+        <div class="step-n">3</div>
+        <div class="step-text">
+          <div class="step-label">Parents see the work</div>
+          <div class="step-desc">They feel like insiders. They stay. They refer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- Promise bar -->
+  <div class="promise-bar">
+    <div class="promise-cell">
+      <div class="promise-icon">⚡</div>
+      <div class="promise-text">
+        <strong>Under 2 minutes</strong>
+        per athlete per session
+      </div>
+    </div>
+    <div class="promise-cell">
+      <div class="promise-icon">🕐</div>
+      <div class="promise-text">
+        <strong>Report back within 1 hour</strong>
+        during business hours
+      </div>
+    </div>
+    <div class="promise-cell">
+      <div class="promise-icon">📬</div>
+      <div class="promise-text">
+        <strong>Ready to send to parents</strong>
+        as a link or PDF
+      </div>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="fch-left">
+        <div class="fch-title">Session details</div>
+        <div class="fch-sub">One form per athlete · Fill out after each session</div>
+      </div>
+      <div class="fch-badge">Early access</div>
+    </div>
+
+    <div class="form-embed-wrap">
+      <div class="form-loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading form…</div>
+      </div>
+
+      <!--
+        REPLACE THE src BELOW WITH YOUR GOOGLE FORM EMBED URL.
+
+        To get your embed URL:
+        1. Open your Google Form
+        2. Click Send → Embed icon (<>)
+        3. Copy the src URL from the iframe code
+        4. Paste it below replacing YOUR_GOOGLE_FORM_EMBED_URL
+
+        It will look like:
+        https://docs.google.com/forms/d/e/1FAIpQLSxxxxxxxxxx/viewform?embedded=true
+      -->
+      <iframe
+        id="form-iframe"
+        class="form-iframe"
+        src="YOUR_GOOGLE_FORM_EMBED_URL"
+        width="100%"
+        height="900"
+        frameborder="0"
+        marginheight="0"
+        marginwidth="0"
+        onload="formLoaded()"
+        title="TrainerIQ Session Report Form">
+        Loading form…
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Turnaround promise -->
+  <div class="turnaround">
+    <div class="ta-icon">🏀</div>
+    <div class="ta-text">
+      <div class="ta-title">Darryl's personal commitment to every trainer</div>
+      <div class="ta-desc">Submit this form and I will have your parent report ready within 1 hour during business hours — usually faster. Text me directly at any time if you need something urgently. You're not using a tool. You have a person in your corner.</div>
+    </div>
+  </div>
+
+  <!-- Contact line -->
+  <div class="contact-line">
+    Questions or issues? Email <a href="mailto:darryl@gettraineriq.com">darryl@gettraineriq.com</a> or DM on Instagram <a href="https://instagram.com" target="_blank">@gettraineriq</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Trainer<span>IQ</span></div>
+  <div class="footer-copy">© 2026 TrainerIQ · gettraineriq.com</div>
+</footer>
+
+<script>
+function formLoaded() {
+  document.getElementById('loading').style.display = 'none';
+  const iframe = document.getElementById('form-iframe');
+  iframe.style.display = 'block';
+}
+
+// Fallback — if form hasn't loaded after 8 seconds, show it anyway
+setTimeout(() => {
+  const loading = document.getElementById('loading');
+  const iframe = document.getElementById('form-iframe');
+  if (loading.style.display !== 'none') {
+    loading.style.display = 'none';
+    iframe.style.display = 'block';
+  }
+}, 8000);
+</script>
+
+</body>
+</html>

@@ -3,322 +3,149 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrainerIQ — Submit Session Report</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Literata:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>TrainerIQ — Trainer Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink:      #111009;
-  --ink2:     #3a3830;
+  --ink:      #0f0e0b;
+  --ink2:     #38352c;
   --ink3:     #7a7568;
-  --bg:       #f7f4ee;
-  --bg2:      #efece4;
+  --bg:       #f5f2eb;
+  --bg2:      #edeae1;
   --surface:  #ffffff;
-  --border:   #e0dbd0;
+  --border:   #dedad0;
   --gold:     #c8890a;
   --gold2:    #f0b429;
   --gold-lt:  #fdf4dc;
   --green:    #1a6e50;
   --green-lt: #e5f5ee;
-  --r: 16px;
+  --red:      #c0341e;
+  --red-lt:   #fceae7;
+  --r:        12px;
+  --sh:       0 1px 3px rgba(15,14,11,.06), 0 4px 16px rgba(15,14,11,.08);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--ink);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-}
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); min-height: 100vh; -webkit-font-smoothing: antialiased; }
 
 /* ── HEADER ── */
-.header {
-  background: var(--ink);
-  padding: 0 2rem;
-  height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.35rem;
-  letter-spacing: .05em;
-  color: #fff;
-}
-.logo span { color: var(--gold2); }
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.header-pill {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.45);
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 20px;
-  padding: 4px 12px;
-}
-.back-link {
-  font-size: 12px;
-  color: rgba(255,255,255,.4);
-  text-decoration: none;
-  transition: color .15s;
-}
-.back-link:hover { color: rgba(255,255,255,.7); }
+.header { background: var(--ink); height: 56px; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; position: sticky; top: 0; z-index: 100; }
+.logo { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: #fff; letter-spacing: -.01em; }
+.logo span { color: var(--gold2); font-style: italic; }
+.trainer-badge { font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.45); background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.1); border-radius: 20px; padding: 4px 12px; }
 
-/* ── HERO STRIP ── */
-.hero {
-  background: var(--ink);
-  padding: 3.5rem 2rem 0;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  width: 500px; height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(200,137,10,.15) 0%, transparent 65%);
-  top: -100px; right: -100px;
-  pointer-events: none;
-}
-.hero-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  position: relative;
-}
-.hero-eyebrow {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--gold2);
-  margin-bottom: .6rem;
-  animation: fadeUp .4s ease both;
-}
-.hero-title {
-  font-family: 'Literata', serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 600;
-  color: #fff;
-  line-height: 1.15;
-  letter-spacing: -.02em;
-  margin-bottom: .75rem;
-  animation: fadeUp .45s ease both;
-}
-.hero-title em {
-  font-style: italic;
-  color: var(--gold2);
-}
-.hero-sub {
-  font-size: 15px;
-  color: rgba(255,255,255,.5);
-  line-height: 1.7;
-  max-width: 520px;
-  margin-bottom: 2.5rem;
-  animation: fadeUp .5s ease both;
-}
+/* ── INVALID CODE PAGE ── */
+.invalid-page { display: none; max-width: 480px; margin: 5rem auto; padding: 2rem 1.5rem; text-align: center; }
+.invalid-page.show { display: block; }
+.invalid-icon { font-size: 2.5rem; opacity: .3; margin-bottom: 1rem; }
+.invalid-title { font-family: 'DM Serif Display', serif; font-size: 1.5rem; color: var(--ink); margin-bottom: .5rem; }
+.invalid-sub { font-size: 14px; color: var(--ink3); line-height: 1.65; }
+.invalid-code { font-family: monospace; font-size: 13px; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 3px 10px; color: var(--red); display: inline-block; margin-top: .5rem; }
 
-/* Steps strip */
-.steps-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid rgba(255,255,255,.08);
-  animation: fadeUp .55s ease both;
-}
-.step-cell {
-  padding: 1.25rem 1.5rem;
-  border-right: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-.step-cell:last-child { border-right: none; }
-.step-n {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  color: var(--gold2);
-  opacity: .3;
-  line-height: 1;
-  flex-shrink: 0;
-}
-.step-text {}
-.step-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-  margin-bottom: 2px;
-}
-.step-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,.6);
-  line-height: 1.5;
-}
-@media(max-width: 600px) {
-  .steps-strip { grid-template-columns: 1fr; }
-  .step-cell { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
-  .step-cell:last-child { border-bottom: none; }
-}
+/* ── HERO ── */
+.hero { background: var(--ink); padding: 2.5rem 1.5rem 0; position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(200,137,10,.14) 0%, transparent 65%); top: -100px; right: -60px; pointer-events: none; }
+.hero-inner { max-width: 680px; margin: 0 auto; position: relative; }
+.hero-greeting { font-size: 12px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 5px; animation: up .4s ease both; }
+.hero-name { font-family: 'DM Serif Display', serif; font-size: clamp(1.8rem, 5vw, 2.6rem); color: #fff; letter-spacing: -.02em; line-height: 1.15; margin-bottom: 6px; animation: up .45s ease both; }
+.hero-name em { color: var(--gold2); font-style: italic; }
+.hero-sub { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.65; margin-bottom: 2rem; animation: up .5s ease both; }
+.stats-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.08); animation: up .55s ease both; }
+.stat { padding: 1rem 1.25rem; border-right: 1px solid rgba(255,255,255,.08); }
+.stat:last-child { border-right: none; }
+.stat-val { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #fff; line-height: 1; margin-bottom: 3px; }
+.stat-lbl { font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; color: rgba(255,255,255,.3); }
 
-/* ── MAIN CONTENT ── */
-.main {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 5rem;
-}
+/* ── MAIN ── */
+.main { max-width: 680px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
 
-/* ── PROMISE BAR ── */
-.promise-bar {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-bottom: 2rem;
-  animation: fadeUp .6s ease both;
-}
-.promise-cell {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: .85rem 1rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.promise-icon { font-size: 1.2rem; flex-shrink: 0; }
-.promise-text { font-size: 12px; color: var(--ink2); line-height: 1.45; }
-.promise-text strong { color: var(--ink); font-weight: 600; display: block; }
-@media(max-width: 560px) { .promise-bar { grid-template-columns: 1fr; } }
+/* ── SEARCH ── */
+.search-wrap { position: relative; margin-bottom: 1.25rem; animation: up .6s ease both; }
+.search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 14px; pointer-events: none; }
+.search-input { width: 100%; padding: 10px 12px 10px 36px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); outline: none; transition: border-color .15s, box-shadow .15s; }
+.search-input::placeholder { color: var(--ink3); }
+.search-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,137,10,.1); }
 
-/* ── FORM CARD ── */
-.form-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(17,16,9,.06), 0 8px 32px rgba(17,16,9,.08);
-  animation: fadeUp .65s ease both;
-}
+/* ── SECTION LABEL ── */
+.sec-lbl { font-size: 10px; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--ink3); margin-bottom: .6rem; display: flex; align-items: center; gap: 8px; }
+.sec-lbl::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.sec-count { font-size: 10px; font-weight: 500; color: var(--ink3); }
 
-.form-card-header {
-  padding: 1.25rem 1.5rem;
-  background: #faf8f3;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.fch-left {}
-.fch-title {
-  font-family: 'Literata', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 2px;
-}
-.fch-sub { font-size: 12px; color: var(--ink3); }
-.fch-badge {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  background: var(--green-lt);
-  color: var(--green);
-  border: 1px solid rgba(26,110,80,.15);
-  border-radius: 20px;
-  padding: 4px 12px;
-  flex-shrink: 0;
-}
+/* ── ATHLETE GRID ── */
+.athlete-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 1rem; animation: up .65s ease both; }
+@media(max-width: 480px) { .athlete-grid { grid-template-columns: 1fr; } }
 
-.form-embed-wrap {
-  padding: 0;
-  position: relative;
-}
+.athlete-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 1rem 1.1rem; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: all .15s; text-decoration: none; position: relative; overflow: hidden; }
+.athlete-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); transform: scaleY(0); transition: transform .15s; border-radius: 0 2px 2px 0; }
+.athlete-card:hover { border-color: var(--gold); box-shadow: var(--sh); transform: translateY(-1px); }
+.athlete-card:hover::before { transform: scaleY(1); }
 
-/* Loading state */
-.form-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  gap: 1rem;
-}
-.loading-spinner {
-  width: 36px; height: 36px;
-  border: 3px solid var(--border);
-  border-top-color: var(--gold);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-.loading-text {
-  font-size: 13px;
-  color: var(--ink3);
-}
+.athlete-av { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: var(--bg2); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: 'DM Serif Display', serif; font-size: 15px; color: var(--ink2); transition: all .15s; }
+.athlete-card:hover .athlete-av { background: var(--gold-lt); border-color: var(--gold); color: var(--gold); }
+.athlete-info { flex: 1; min-width: 0; }
+.athlete-name { font-size: 14px; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.athlete-meta { font-size: 11px; color: var(--ink3); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.athlete-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.athlete-arrow { font-size: 14px; color: var(--border); transition: color .15s, transform .15s; }
+.athlete-card:hover .athlete-arrow { color: var(--gold); transform: translateX(2px); }
+.delete-btn { font-size: 10px; color: var(--ink3); background: none; border: none; cursor: pointer; padding: 2px 4px; border-radius: 4px; transition: all .12s; opacity: 0; }
+.athlete-card:hover .delete-btn { opacity: 1; }
+.delete-btn:hover { background: var(--red-lt); color: var(--red); }
 
-/* The iframe */
-.form-iframe {
-  width: 100%;
-  min-height: 900px;
-  border: none;
-  display: none;
-  background: transparent;
-}
+/* ── EMPTY STATES ── */
+.empty-state { text-align: center; padding: 3rem 1.5rem; background: var(--surface); border: 1.5px dashed var(--border); border-radius: var(--r); display: none; grid-column: 1 / -1; }
+.empty-state.visible { display: block; }
+.empty-icon { font-size: 2rem; opacity: .3; margin-bottom: .6rem; }
+.empty-text { font-size: 13px; color: var(--ink3); line-height: 1.65; }
 
-/* ── CONTACT LINE ── */
-.contact-line {
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 13px;
-  color: var(--ink3);
-  animation: fadeUp .75s ease both;
-}
-.contact-line a {
-  color: var(--gold);
-  text-decoration: none;
-  font-weight: 500;
-}
-.contact-line a:hover { color: var(--gold2); }
+/* ── QUICK START ── */
+.new-session-btn { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; background: var(--ink); border-radius: var(--r); text-decoration: none; margin-bottom: 1.5rem; transition: all .15s; animation: up .55s ease both; }
+.new-session-btn:hover { background: #1c1a16; transform: translateY(-1px); }
+.nsb-label { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 3px; }
+.nsb-title { font-size: 15px; font-weight: 600; color: #fff; }
+.nsb-arrow { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; transition: transform .15s; }
+.new-session-btn:hover .nsb-arrow { transform: translateX(2px); }
+
+/* ── ADD BUTTON ── */
+.add-wrap { animation: up .7s ease both; }
+.add-btn { width: 100%; padding: 11px; background: transparent; border: 1.5px dashed var(--border); border-radius: var(--r); font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--ink3); cursor: pointer; transition: all .15s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.add-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-lt); }
+
+/* ── HOW IT WORKS ── */
+.how-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 1.1rem 1.25rem; margin-top: 1.5rem; animation: up .75s ease both; }
+.how-steps { display: flex; flex-direction: column; gap: 8px; margin-top: .6rem; }
+.how-step { display: flex; align-items: flex-start; gap: 10px; font-size: 12px; color: var(--ink2); line-height: 1.5; }
+.how-n { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; background: var(--gold-lt); border: 1px solid rgba(200,137,10,.2); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: var(--gold); }
+
+/* ── PERSISTENCE NOTE ── */
+.persist-note { margin-top: 1rem; padding: .75rem 1rem; background: var(--green-lt); border: 1px solid rgba(26,110,80,.15); border-radius: 9px; font-size: 12px; color: var(--green); line-height: 1.55; animation: up .8s ease both; display: flex; gap: 8px; align-items: flex-start; }
+
+/* ── CONTACT ── */
+.contact-line { text-align: center; font-size: 12px; color: var(--ink3); margin-top: 1.5rem; animation: up .85s ease both; }
+.contact-line a { color: var(--gold); text-decoration: none; font-weight: 500; }
 
 /* ── FOOTER ── */
-footer {
-  background: var(--ink);
-  padding: 1.5rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-.footer-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1rem;
-  letter-spacing: .05em;
-  color: rgba(255,255,255,.35);
-}
-.footer-logo span { color: var(--gold); }
-.footer-copy {
-  font-size: 11px;
-  color: rgba(255,255,255,.2);
-}
+footer { background: var(--ink); padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+.footer-logo { font-family: 'DM Serif Display', serif; font-size: .95rem; color: rgba(255,255,255,.3); }
+.footer-logo span { color: var(--gold); font-style: italic; }
+.footer-copy { font-size: 11px; color: rgba(255,255,255,.2); }
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+/* ── MODAL ── */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.6); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 1rem; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal { background: var(--surface); border-radius: 16px; padding: 1.75rem; max-width: 420px; width: 100%; transform: translateY(16px); transition: transform .2s; position: relative; }
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close { position: absolute; top: 1rem; right: 1rem; width: 28px; height: 28px; border-radius: 50%; background: var(--bg2); border: none; cursor: pointer; font-size: 13px; color: var(--ink3); display: flex; align-items: center; justify-content: center; transition: all .12s; }
+.modal-close:hover { background: var(--border); color: var(--ink); }
+.modal-title { font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 4px; }
+.modal-sub { font-size: 13px; color: var(--ink3); margin-bottom: 1.25rem; line-height: 1.55; }
+.modal-field { margin-bottom: .85rem; }
+.modal-field label { display: block; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); margin-bottom: 4px; }
+.modal-field input, .modal-field select { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--ink); background: var(--bg); outline: none; transition: border-color .15s, box-shadow .15s; -webkit-appearance: none; }
+.modal-field input:focus, .modal-field select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,137,10,.1); background: #fff; }
+.modal-submit { width: 100%; padding: 11px; background: var(--gold); color: var(--ink); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; cursor: pointer; transition: all .15s; margin-top: .25rem; }
+.modal-submit:hover { background: var(--gold2); }
+
+@keyframes up { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 </style>
 </head>
 <body>
@@ -326,136 +153,333 @@ footer {
 <!-- HEADER -->
 <div class="header">
   <div class="logo">Trainer<span>IQ</span></div>
-  <div class="header-right">
-    <div class="header-pill">Trainer Portal</div>
-    <a href="/" class="back-link">← Back to site</a>
-  </div>
+  <div class="trainer-badge" id="header-badge">Loading…</div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Session report</div>
-    <h1 class="hero-title">Two minutes.<br><em>One report parents love.</em></h1>
-    <p class="hero-sub">Fill this out right after your session while it's fresh. We handle the rest — your report will be ready to send to parents within the hour.</p>
-
-    <div class="steps-strip">
-      <div class="step-cell">
-        <div class="step-n">1</div>
-        <div class="step-text">
-          <div class="step-label">You fill this form</div>
-          <div class="step-desc">Skill tags, ratings, a quick personal note. Under 2 minutes.</div>
-        </div>
-      </div>
-      <div class="step-cell">
-        <div class="step-n">2</div>
-        <div class="step-text">
-          <div class="step-label">We build the report</div>
-          <div class="step-desc">Professional, specific, warm. Back to you within the hour.</div>
-        </div>
-      </div>
-      <div class="step-cell">
-        <div class="step-n">3</div>
-        <div class="step-text">
-          <div class="step-label">Parents see the work</div>
-          <div class="step-desc">They feel like insiders. They stay. They refer.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- INVALID CODE STATE -->
+<div class="invalid-page" id="invalid-page">
+  <div class="invalid-icon">🔒</div>
+  <div class="invalid-title">Invalid trainer code</div>
+  <div class="invalid-sub">This link doesn't match a registered trainer. Check your link or contact Darryl.<br><span class="invalid-code" id="invalid-code-display"></span></div>
 </div>
 
-<!-- MAIN -->
-<div class="main">
+<!-- VALID TRAINER VIEW -->
+<div id="trainer-view" style="display:none">
 
-  <!-- Promise bar -->
-  <div class="promise-bar">
-    <div class="promise-cell">
-      <div class="promise-icon">⚡</div>
-      <div class="promise-text">
-        <strong>Under 2 minutes</strong>
-        per athlete per session
-      </div>
-    </div>
-    <div class="promise-cell">
-      <div class="promise-icon">🕐</div>
-      <div class="promise-text">
-        <strong>Report back within 1 hour</strong>
-        during business hours
-      </div>
-    </div>
-    <div class="promise-cell">
-      <div class="promise-icon">📬</div>
-      <div class="promise-text">
-        <strong>Ready to send to parents</strong>
-        as a link or PDF
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-greeting">Welcome back</div>
+      <h1 class="hero-name">Ready for <em>today's session?</em></h1>
+      <p class="hero-sub">Tap an athlete to open their pre-filled report form. Takes under 2 minutes.</p>
+      <div class="stats-strip">
+        <div class="stat">
+          <div class="stat-val" id="stat-athletes">0</div>
+          <div class="stat-lbl">Athletes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" id="stat-sessions">0</div>
+          <div class="stat-lbl">Sessions logged</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">2025–26</div>
+          <div class="stat-lbl">Season</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Form card -->
-  <div class="form-card">
-    <div class="form-card-header">
-      <div class="fch-left">
-        <div class="fch-title">Session details</div>
-        <div class="fch-sub">One form per athlete · Fill out after each session</div>
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- Quick start -->
+    <a class="new-session-btn" id="quick-start-btn" href="#" target="_blank">
+      <div>
+        <div class="nsb-label">Quick start — no athlete selected</div>
+        <div class="nsb-title">Open blank session form →</div>
       </div>
-      <div class="fch-badge">Early access</div>
+      <div class="nsb-arrow">→</div>
+    </a>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" class="search-input" id="search" placeholder="Search athletes…" oninput="filterAthletes(this.value)">
     </div>
 
-    <div class="form-embed-wrap">
-      <div class="form-loading" id="loading">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Loading form…</div>
-      </div>
-
-      <iframe
-        id="form-iframe"
-        class="form-iframe"
-        src="https://tally.so/embed/q4jD42?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-        width="100%"
-        height="900"
-        frameborder="0"
-        marginheight="0"
-        marginwidth="0"
-        onload="formLoaded()"
-        title="TrainerIQ Session Report Form">
-        Loading form…
-      </iframe>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:.6rem;">
+      <div class="sec-lbl" style="flex:1; margin-bottom:0">Your athletes</div>
+      <div class="sec-count" id="athlete-count" style="font-size:10px; color:var(--ink3); margin-left:8px;"></div>
     </div>
+
+    <!-- Grid -->
+    <div class="athlete-grid" id="athlete-grid"></div>
+
+    <!-- Add button -->
+    <div class="add-wrap" style="margin-top:.75rem">
+      <button class="add-btn" onclick="openModal()">+ Add athlete</button>
+    </div>
+
+    <!-- Persistence note -->
+    <div class="persist-note">
+      <span>💾</span>
+      <span>Your roster is saved on this device. To access it on another device or phone, contact Darryl and he'll sync your roster — <a href="mailto:darryl@gettraineriq.com" style="color:var(--green);font-weight:600;">darryl@gettraineriq.com</a></span>
+    </div>
+
+    <!-- How it works -->
+    <div class="how-card">
+      <div class="sec-lbl" style="margin-bottom:.5rem">How it works</div>
+      <div class="how-steps">
+        <div class="how-step"><div class="how-n">1</div>Tap an athlete card — the form opens with their name and parent email already filled in.</div>
+        <div class="how-step"><div class="how-n">2</div>Fill in the session details. Skills, ratings, a quick note. Under 2 minutes.</div>
+        <div class="how-step"><div class="how-n">3</div>Submit. Darryl has your parent report back within the hour.</div>
+      </div>
+    </div>
+
+    <div class="contact-line">
+      Questions? <a href="mailto:darryl@gettraineriq.com">darryl@gettraineriq.com</a>
+    </div>
+
   </div>
 
-  <!-- Contact line -->
-  <div class="contact-line">
-    Questions or issues? Email <a href="mailto:darryl@gettraineriq.com">darryl@gettraineriq.com</a> or DM on Instagram <a href="https://instagram.com" target="_blank">@gettraineriq</a>
-  </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Trainer<span>IQ</span></div>
+    <div class="footer-copy">© 2026 TrainerIQ · gettraineriq.com</div>
+  </footer>
 
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">Trainer<span>IQ</span></div>
-  <div class="footer-copy">© 2026 TrainerIQ · gettraineriq.com</div>
-</footer>
+<!-- ADD ATHLETE MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlay(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">Add athlete</div>
+    <div class="modal-sub">Their name and parent email will pre-fill in the report form every time.</div>
+    <div class="modal-field">
+      <label>First name</label>
+      <input type="text" id="m-first" placeholder="e.g. Jordan">
+    </div>
+    <div class="modal-field">
+      <label>Last name</label>
+      <input type="text" id="m-last" placeholder="e.g. Smith">
+    </div>
+    <div class="modal-field">
+      <label>Age / division</label>
+      <select id="m-age">
+        <option value="">Select…</option>
+        <option>6–8 yrs (beginner)</option>
+        <option>9–11 yrs (developing)</option>
+        <option>12–14 yrs (intermediate)</option>
+        <option>15–17 yrs (advanced)</option>
+        <option>18+ / elite</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Parent email</label>
+      <input type="email" id="m-email" placeholder="parent@email.com">
+    </div>
+    <button class="modal-submit" onclick="addAthlete()">Add to roster →</button>
+  </div>
+</div>
 
 <script>
-function formLoaded() {
-  document.getElementById('loading').style.display = 'none';
-  const iframe = document.getElementById('form-iframe');
-  iframe.style.display = 'block';
+// ─────────────────────────────────────────────────
+//  REGISTERED TRAINER CODES
+//  Add each new trainer here when you onboard them
+//  Format: code (uppercase) → trainer display name
+// ─────────────────────────────────────────────────
+const TRAINER_CODES = {
+  'HLA': 'HLA Basketball',
+  // Add more trainers here as you onboard them:
+  // 'NYC': 'New York Trainer Name',
+  // 'ATL': 'Atlanta Trainer Name',
+};
+
+// Tally base form URL
+const TALLY_BASE = 'https://tally.so/r/q4jD42';
+
+// ─────────────────────────────────────────────────
+//  URL CODE DETECTION
+// ─────────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+const CODE   = (params.get('code') || '').toUpperCase().trim();
+const STORAGE_KEY = `traineriq_roster_${CODE}`;
+const SESSION_KEY = `traineriq_sessions_${CODE}`;
+
+// ─────────────────────────────────────────────────
+//  STORAGE HELPERS
+// ─────────────────────────────────────────────────
+function loadRoster() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch { return []; }
+}
+function saveRoster(roster) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(roster));
+}
+function loadSessions() {
+  try { return parseInt(localStorage.getItem(SESSION_KEY)) || 0; }
+  catch { return 0; }
+}
+function incrementSessions() {
+  const n = loadSessions() + 1;
+  localStorage.setItem(SESSION_KEY, n);
+  document.getElementById('stat-sessions').textContent = n;
 }
 
-// Fallback — if form hasn't loaded after 8 seconds, show it anyway
-setTimeout(() => {
-  const loading = document.getElementById('loading');
-  const iframe = document.getElementById('form-iframe');
-  if (loading.style.display !== 'none') {
-    loading.style.display = 'none';
-    iframe.style.display = 'block';
-  }
-}, 8000);
-</script>
+// ─────────────────────────────────────────────────
+//  FORM URL BUILDER
+// ─────────────────────────────────────────────────
+function buildURL(athlete) {
+  const p = new URLSearchParams({
+    trainer_code: CODE,
+    athlete_name: `${athlete.first} ${athlete.last}`,
+    age:          athlete.age,
+    parent_email: athlete.email || ''
+  });
+  return `${TALLY_BASE}?${p.toString()}`;
+}
 
-<script src="https://tally.so/widgets/embed.js"></script>
+function getInitials(f, l) {
+  return `${(f||'?')[0]}${(l||'?')[0]}`.toUpperCase();
+}
+
+// ─────────────────────────────────────────────────
+//  RENDER ATHLETES
+// ─────────────────────────────────────────────────
+function renderAthletes(list) {
+  const grid  = document.getElementById('athlete-grid');
+  const count = document.getElementById('athlete-count');
+  const roster = loadRoster();
+
+  count.textContent = roster.length ? `${roster.length} athlete${roster.length !== 1 ? 's' : ''}` : '';
+  document.getElementById('stat-athletes').textContent = roster.length || '0';
+
+  if (roster.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state visible" style="grid-column:1/-1">
+        <div class="empty-icon">🏀</div>
+        <div class="empty-text">No athletes yet.<br>Tap <strong>Add athlete</strong> below to build your roster.</div>
+      </div>`;
+    return;
+  }
+
+  if (list.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-state visible" style="grid-column:1/-1">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-text">No athletes match your search.</div>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map((a, i) => {
+    const realIdx = roster.indexOf(a);
+    return `
+    <a class="athlete-card" href="${buildURL(a)}" target="_blank" onclick="incrementSessions()">
+      <div class="athlete-av">${getInitials(a.first, a.last)}</div>
+      <div class="athlete-info">
+        <div class="athlete-name">${a.first} ${a.last}</div>
+        <div class="athlete-meta">${a.age}${a.email ? ' · ' + a.email : ''}</div>
+      </div>
+      <div class="athlete-right">
+        <div class="athlete-arrow">→</div>
+        <button class="delete-btn" onclick="deleteAthlete(event, ${realIdx})">✕ remove</button>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function filterAthletes(q) {
+  const roster = loadRoster();
+  const filtered = q.trim()
+    ? roster.filter(a => `${a.first} ${a.last}`.toLowerCase().includes(q.toLowerCase()) || (a.email||'').toLowerCase().includes(q.toLowerCase()))
+    : roster;
+  renderAthletes(filtered);
+}
+
+// ─────────────────────────────────────────────────
+//  ADD / DELETE ATHLETES
+// ─────────────────────────────────────────────────
+function addAthlete() {
+  const first = document.getElementById('m-first').value.trim();
+  const last  = document.getElementById('m-last').value.trim();
+  const age   = document.getElementById('m-age').value;
+  const email = document.getElementById('m-email').value.trim();
+
+  if (!first) { alert('Please enter the athlete\'s first name.'); return; }
+  if (!last)  { alert('Please enter the athlete\'s last name.'); return; }
+
+  const roster = loadRoster();
+  roster.push({ first, last, age: age || 'Age not set', email });
+  saveRoster(roster);
+  renderAthletes(roster);
+
+  ['m-first','m-last','m-email'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('m-age').value = '';
+  closeModal();
+}
+
+function deleteAthlete(e, idx) {
+  e.preventDefault();
+  e.stopPropagation();
+  const roster = loadRoster();
+  const name = `${roster[idx].first} ${roster[idx].last}`;
+  if (!confirm(`Remove ${name} from your roster?`)) return;
+  roster.splice(idx, 1);
+  saveRoster(roster);
+  renderAthletes(roster);
+}
+
+// ─────────────────────────────────────────────────
+//  MODAL
+// ─────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('m-first').focus(), 200);
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlay(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'Enter' && document.getElementById('modal').classList.contains('open')) addAthlete();
+});
+
+// ─────────────────────────────────────────────────
+//  INIT
+// ─────────────────────────────────────────────────
+function init() {
+  // Validate code
+  if (!CODE || !TRAINER_CODES[CODE]) {
+    document.getElementById('invalid-page').classList.add('show');
+    document.getElementById('header-badge').textContent = 'Invalid code';
+    if (CODE) document.getElementById('invalid-code-display').textContent = `code: ${CODE}`;
+    return;
+  }
+
+  // Valid trainer
+  const trainerName = TRAINER_CODES[CODE];
+  document.getElementById('trainer-view').style.display = 'block';
+  document.getElementById('header-badge').textContent = trainerName;
+
+  // Quick start link
+  document.getElementById('quick-start-btn').href =
+    `${TALLY_BASE}?trainer_code=${CODE}`;
+
+  // Stats
+  document.getElementById('stat-sessions').textContent = loadSessions();
+
+  // Render roster
+  renderAthletes(loadRoster());
+}
+
+init();
+</script>
 </body>
 </html>

@@ -227,7 +227,7 @@ footer { background: var(--ink); padding: 1.25rem 1.5rem; display: flex; align-i
     <!-- Persistence note -->
     <div class="persist-note">
       <span>💾</span>
-      <span>Your roster is saved on this device. To access it on another device or phone, contact us and we'll sync your roster — <a href="mailto:darryl@gettraineriq.com" style="color:var(--green);font-weight:600;">darryl@gettraineriq.com</a></span>
+      <span>Your roster is saved on this device. To access it on another device or phone, contact Darryl and he'll sync your roster — <a href="mailto:darryl@gettraineriq.com" style="color:var(--green);font-weight:600;">darryl@gettraineriq.com</a></span>
     </div>
 
     <!-- How it works -->
@@ -236,7 +236,7 @@ footer { background: var(--ink); padding: 1.25rem 1.5rem; display: flex; align-i
       <div class="how-steps">
         <div class="how-step"><div class="how-n">1</div>Tap an athlete card — the form opens with their name and parent email already filled in.</div>
         <div class="how-step"><div class="how-n">2</div>Fill in the session details. Skills, ratings, a quick note. Under 2 minutes.</div>
-        <div class="how-step"><div class="how-n">3</div>Submit. We will have your parent report back shortly.</div>
+        <div class="how-step"><div class="how-n">3</div>Submit. Darryl has your parent report back within the hour.</div>
       </div>
     </div>
 
@@ -291,13 +291,13 @@ footer { background: var(--ink); padding: 1.25rem 1.5rem; display: flex; align-i
 // ─────────────────────────────────────────────────
 //  REGISTERED TRAINER CODES
 //  Add each new trainer here when you onboard them
-//  Format: code (uppercase) → trainer display name
+//  Format: code → { name, email }
 // ─────────────────────────────────────────────────
 const TRAINER_CODES = {
-  'HLA': 'Mack Lewis',
+  'HLA': { name: 'Mack Lewis', email: 'mackenzie@hooploveacademy.com' },
   // Add more trainers here as you onboard them:
-  // 'NYC': 'New York Trainer Name',
-  // 'ATL': 'Atlanta Trainer Name',
+  // 'NYC': { name: 'Trainer Name', email: 'trainer@email.com' },
+  // 'ATL': { name: 'Trainer Name', email: 'trainer@email.com' },
 };
 
 // Tally base form URL
@@ -335,11 +335,13 @@ function incrementSessions() {
 //  FORM URL BUILDER
 // ─────────────────────────────────────────────────
 function buildURL(athlete) {
+  const trainer = TRAINER_CODES[CODE];
   const p = new URLSearchParams({
-    trainer_name: TRAINER_CODES[CODE],
-    athlete_name: `${athlete.first} ${athlete.last}`,
-    athlete_age:  athlete.age,
-    parent_email: athlete.email || ''
+    trainer_name:  trainer.name,
+    trainer_email: trainer.email,
+    athlete_name:  `${athlete.first} ${athlete.last}`,
+    athlete_age:   athlete.age,
+    parent_email:  athlete.email || ''
   });
   return `${TALLY_BASE}?${p.toString()}`;
 }
@@ -518,13 +520,13 @@ function init() {
   }
 
   // Valid trainer
-  const trainerName = TRAINER_CODES[CODE];
+  const trainer = TRAINER_CODES[CODE];
   document.getElementById('trainer-view').style.display = 'block';
-  document.getElementById('header-badge').textContent = trainerName;
+  document.getElementById('header-badge').textContent = trainer.name;
 
-  // Quick start link
+  // Quick start link — passes trainer name and email even on blank sessions
   document.getElementById('quick-start-btn').href =
-    `${TALLY_BASE}?trainer_name=${encodeURIComponent(TRAINER_CODES[CODE])}`;
+    `${TALLY_BASE}?trainer_name=${encodeURIComponent(trainer.name)}&trainer_email=${encodeURIComponent(trainer.email)}`;
 
   // Stats
   document.getElementById('stat-sessions').textContent = loadSessions();

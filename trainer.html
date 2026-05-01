@@ -274,32 +274,6 @@ body {
   background: transparent;
 }
 
-/* ── TURNAROUND PROMISE ── */
-.turnaround {
-  margin-top: 1.25rem;
-  background: var(--gold-lt);
-  border: 1px solid rgba(200,137,10,.2);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  animation: fadeUp .7s ease both;
-}
-.ta-icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
-.ta-text {}
-.ta-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 3px;
-}
-.ta-desc {
-  font-size: 12px;
-  color: var(--ink2);
-  line-height: 1.6;
-}
-
 /* ── CONTACT LINE ── */
 .contact-line {
   text-align: center;
@@ -435,22 +409,10 @@ footer {
         <div class="loading-text">Loading form…</div>
       </div>
 
-      <!--
-        REPLACE THE src BELOW WITH YOUR GOOGLE FORM EMBED URL.
-
-        To get your embed URL:
-        1. Open your Google Form
-        2. Click Send → Embed icon (<>)
-        3. Copy the src URL from the iframe code
-        4. Paste it below replacing YOUR_GOOGLE_FORM_EMBED_URL
-
-        It will look like:
-        https://docs.google.com/forms/d/e/1FAIpQLSxxxxxxxxxx/viewform?embedded=true
-      -->
       <iframe
         id="form-iframe"
         class="form-iframe"
-        src="YOUR_GOOGLE_FORM_EMBED_URL"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSfrrPB5VGZf-4mjk01rof_7N3J-YSWbRG4nmMtG6Z71pt4txA/viewform?embedded=true"
         width="100%"
         height="900"
         frameborder="0"
@@ -460,15 +422,6 @@ footer {
         title="TrainerIQ Session Report Form">
         Loading form…
       </iframe>
-    </div>
-  </div>
-
-  <!-- Turnaround promise -->
-  <div class="turnaround">
-    <div class="ta-icon">🏀</div>
-    <div class="ta-text">
-      <div class="ta-title">Darryl's personal commitment to every trainer</div>
-      <div class="ta-desc">Submit this form and I will have your parent report ready within 1 hour during business hours — usually faster. Text me directly at any time if you need something urgently. You're not using a tool. You have a person in your corner.</div>
     </div>
   </div>
 

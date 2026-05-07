@@ -3,552 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrainerIQ — Turn Every Session Into a Story Parents Love</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>TrainerIQ — Parents finally see the work.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=Figtree:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:     #111009;
-  --ink2:    #3a3830;
-  --ink3:    #7a7568;
-  --sand:    #f8f5ef;
-  --sand2:   #eeebe2;
-  --border:  #e0dbd0;
-  --gold:    #d4920c;
-  --gold2:   #f5b829;
-  --gold-lt: #fdf4dc;
-  --green:   #1a6e50;
-  --green-lt:#e5f5ee;
-  --white:   #ffffff;
-  --r:       14px;
+:root{
+  --bg:#0c0b09;--bg2:#141210;--bg3:#1c1a14;
+  --line:#2a2820;--muted:#5a5750;--dim:#8a8780;
+  --text:#d8d5ce;--bright:#f5f2ea;
+  --gold:#c8890a;--gold2:#f0b429;
+  --green:#2cb87a;--teal:#3aaabf;
 }
-* { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
-body {
-  font-family:'Figtree',sans-serif;
-  background:var(--white);
-  color:var(--ink);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Figtree',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 
 /* ── NAV ── */
-nav {
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);
-  height:62px;
-  display:flex; align-items:center; justify-content:space-between;
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:58px;display:flex;align-items:center;justify-content:space-between;
   padding:0 2rem;
+  background:rgba(12,11,9,.94);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
 }
-.nav-logo {
-  font-family:'Playfair Display',serif;
-  font-size:1.3rem; font-weight:900;
-  color:var(--ink); letter-spacing:-.02em;
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.05em;color:var(--bright);}
+.logo em{color:var(--gold);font-style:normal;}
+.nav-cta{
+  background:var(--gold);color:var(--bg);
+  padding:8px 20px;border-radius:6px;
+  font-size:13px;font-weight:700;border:none;cursor:pointer;
+  font-family:'Figtree',sans-serif;letter-spacing:.02em;
+  transition:all .15s;text-decoration:none;display:inline-block;
 }
-.nav-logo em { color:var(--gold); font-style:normal; }
-.nav-links { display:flex; align-items:center; gap:1.75rem; }
-.nav-links a {
-  font-size:13.5px; font-weight:500; color:var(--ink3);
-  text-decoration:none; transition:color .15s;
-}
-.nav-links a:hover { color:var(--ink); }
-.nav-cta {
-  background:var(--ink); color:#fff;
-  padding:9px 20px; border-radius:8px;
-  font-size:13px; font-weight:700;
-  text-decoration:none; letter-spacing:.01em;
-  transition:all .15s;
-  border:none; cursor:pointer; font-family:'Figtree',sans-serif;
-}
-.nav-cta:hover { background:#2a2820; transform:translateY(-1px); }
-@media(max-width:640px){ .nav-links { display:none; } }
+.nav-cta:hover{background:var(--gold2);}
 
 /* ── HERO ── */
-.hero {
-  padding:9rem 1.5rem 5rem;
-  background:var(--ink);
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
   text-align:center;
-  position:relative;
-  overflow:hidden;
+  padding:7rem 1.5rem 5rem;
+  position:relative;overflow:hidden;
 }
-.hero-bg-ring {
-  position:absolute;
-  border-radius:50%;
-  border:1px solid rgba(212,146,12,.12);
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 55% at 50% 35%,rgba(200,137,10,.07) 0%,transparent 65%);
   pointer-events:none;
 }
-.ring1 { width:600px; height:600px; top:50%; left:50%; transform:translate(-50%,-50%); }
-.ring2 { width:900px; height:900px; top:50%; left:50%; transform:translate(-50%,-50%); }
-.ring3 { width:1200px; height:1200px; top:50%; left:50%; transform:translate(-50%,-50%); }
-
-.hero-label {
+.hero-eye{
   display:inline-block;
-  font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--gold); background:rgba(212,146,12,.12);
-  border:1px solid rgba(212,146,12,.25);
-  border-radius:20px; padding:5px 14px;
-  margin-bottom:1.5rem;
-  animation:fadeUp .5s ease both;
+  font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.5rem;
+  animation:up .4s ease both;
 }
-.hero-h1 {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2.4rem, 6vw, 4rem);
-  font-weight:900;
-  color:#fff;
-  line-height:1.1;
-  letter-spacing:-.03em;
-  max-width:700px; margin:0 auto;
-  animation:fadeUp .55s ease both;
+h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,11vw,9rem);
+  letter-spacing:.01em;line-height:.92;
+  color:var(--bright);margin-bottom:1.25rem;
+  animation:up .5s ease both;
 }
-.hero-h1 em { color:var(--gold2); font-style:italic; }
-.hero-sub {
-  font-size:1.05rem;
-  color:rgba(255,255,255,.5);
-  max-width:480px; margin:1.25rem auto 0;
-  line-height:1.7;
-  animation:fadeUp .6s ease both;
+h1 em{color:var(--gold);font-family:'Instrument Serif',serif;font-style:italic;}
+.hero-sub{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(1.05rem,2vw,1.35rem);
+  color:rgba(255,255,255,.42);
+  max-width:520px;line-height:1.72;
+  margin:0 auto 2.5rem;
+  animation:up .6s ease both;
 }
-.hero-actions {
-  display:flex; align-items:center; justify-content:center; gap:.75rem;
-  margin-top:2rem; flex-wrap:wrap;
-  animation:fadeUp .65s ease both;
+.hero-sub em{color:var(--text);font-style:italic;}
+.hero-btns{
+  display:flex;align-items:center;justify-content:center;gap:.85rem;
+  flex-wrap:wrap;animation:up .65s ease both;
 }
-.btn-primary {
-  background:var(--gold);
-  color:var(--ink);
-  padding:14px 28px; border-radius:10px;
-  font-size:15px; font-weight:800;
-  text-decoration:none; letter-spacing:.01em;
-  transition:all .15s; border:none; cursor:pointer;
-  font-family:'Figtree',sans-serif;
-  display:inline-block;
+.btn-gold{
+  background:var(--gold);color:var(--bg);
+  padding:14px 32px;border-radius:8px;
+  font-size:15px;font-weight:700;letter-spacing:.02em;
+  border:none;cursor:pointer;font-family:'Figtree',sans-serif;
+  text-decoration:none;display:inline-block;
+  transition:all .15s;
 }
-.btn-primary:hover { background:var(--gold2); transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,146,12,.3); }
-.btn-ghost-lt {
-  color:rgba(255,255,255,.6); font-size:14px; font-weight:500;
-  text-decoration:none; padding:14px 20px;
-  border:1px solid rgba(255,255,255,.15); border-radius:10px;
-  transition:all .15s; display:inline-block;
+.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,137,10,.28);}
+.btn-outline{
+  color:rgba(255,255,255,.4);font-size:14px;font-weight:500;
+  text-decoration:none;padding:14px 18px;
+  border:1px solid rgba(255,255,255,.1);border-radius:8px;
+  transition:all .15s;font-family:'Figtree',sans-serif;
 }
-.btn-ghost-lt:hover { color:#fff; border-color:rgba(255,255,255,.3); }
-.hero-proof {
-  font-size:12px; color:rgba(255,255,255,.3);
-  margin-top:1rem;
-  animation:fadeUp .7s ease both;
-}
-.hero-proof span { color:rgba(255,255,255,.5); }
-
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(16px); }
-  to   { opacity:1; transform:translateY(0); }
+.btn-outline:hover{color:#fff;border-color:rgba(255,255,255,.22);}
+.hero-note{
+  font-size:11px;color:rgba(255,255,255,.18);
+  letter-spacing:.06em;margin-top:1.1rem;
+  animation:up .7s ease both;
 }
 
-/* ── SOCIAL PROOF TICKER ── */
-.ticker {
-  background:var(--gold);
-  padding:.6rem 0;
-  overflow:hidden;
-  white-space:nowrap;
+/* ── SECTION SHARED ── */
+.sec{padding:6.5rem 1.5rem;}
+.inner{max-width:960px;margin:0 auto;}
+.kicker{
+  font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.85rem;
 }
-.ticker-inner {
-  display:inline-flex; gap:3rem;
-  animation:scroll 22s linear infinite;
+h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.4rem,5.5vw,4.5rem);
+  letter-spacing:.02em;color:var(--bright);line-height:1;
+  margin-bottom:1rem;
 }
-.ticker-inner span {
-  font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
-  color:var(--ink);
+h2 em{color:var(--gold);font-family:'Instrument Serif',serif;font-style:italic;}
+.sec-sub{
+  font-family:'Instrument Serif',serif;
+  font-size:1.1rem;color:rgba(255,255,255,.4);
+  line-height:1.72;max-width:480px;
 }
-.ticker-inner span::before { content:'⚡ '; }
-@keyframes scroll {
-  from { transform:translateX(0); }
-  to   { transform:translateX(-50%); }
-}
-
-/* ── PROBLEM SECTION ── */
-.problem {
-  padding:5rem 1.5rem;
-  background:var(--sand);
-  text-align:center;
-}
-.section-kicker { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); margin-bottom:.75rem; }
-.section-h2 {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.7rem,4vw,2.5rem);
-  font-weight:900; letter-spacing:-.03em;
-  color:var(--ink); line-height:1.2;
-  max-width:580px; margin:0 auto;
-}
-.section-h2 em { color:var(--gold); font-style:italic; }
-.section-sub {
-  font-size:1rem; color:var(--ink3);
-  max-width:480px; margin:1rem auto 0; line-height:1.7;
-}
-
-.pain-grid {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.25rem;
-  max-width:860px; margin:3rem auto 0;
-}
-@media(max-width:640px){ .pain-grid { grid-template-columns:1fr; } }
-.pain-card {
-  background:var(--white); border:1px solid var(--border);
-  border-radius:var(--r); padding:1.5rem;
-  text-align:left;
-}
-.pain-emoji { font-size:1.5rem; margin-bottom:.75rem; }
-.pain-title { font-size:15px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
-.pain-text  { font-size:13.5px; color:var(--ink3); line-height:1.65; }
 
 /* ── HOW IT WORKS ── */
-.how {
-  padding:5rem 1.5rem;
-  background:var(--white);
-  text-align:center;
+.how-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:4.5rem;align-items:center;
 }
-.steps {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  gap:0; max-width:800px; margin:3rem auto 0;
-  position:relative;
+@media(max-width:720px){.how-grid{grid-template-columns:1fr;gap:2.5rem;}}
+.steps{display:flex;flex-direction:column;gap:0;margin-top:2rem;}
+.step{
+  display:flex;gap:1.1rem;align-items:flex-start;
+  padding-bottom:1.4rem;position:relative;
 }
-.steps::before {
-  content:'';
-  position:absolute;
-  top:28px; left:calc(16.6% + 16px); right:calc(16.6% + 16px);
-  height:1px; background:var(--border);
+.step:last-child{padding-bottom:0;}
+.step::before{
+  content:'';position:absolute;
+  left:14px;top:30px;bottom:0;
+  width:1px;background:var(--line);
 }
-@media(max-width:640px){ .steps { grid-template-columns:1fr; gap:2rem; } .steps::before{ display:none; } }
-.step { padding:0 1rem; position:relative; }
-.step-num {
-  width:56px; height:56px; border-radius:50%;
-  background:var(--ink); color:var(--gold);
-  font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900;
-  display:flex; align-items:center; justify-content:center;
-  margin:0 auto 1.25rem; position:relative; z-index:1;
+.step:last-child::before{display:none;}
+.step-dot{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;border:1px solid var(--line);
+  background:var(--bg2);
 }
-.step-title { font-size:16px; font-weight:700; color:var(--ink); margin-bottom:.4rem; }
-.step-text  { font-size:13.5px; color:var(--ink3); line-height:1.65; }
+.step-body{flex:1;padding-top:4px;}
+.step-title{font-size:13px;font-weight:600;color:var(--bright);margin-bottom:2px;}
+.step-text{font-size:12px;color:var(--muted);line-height:1.55;}
 
-/* ── PRODUCT PREVIEW ── */
-.preview {
-  padding:5rem 1.5rem;
-  background:var(--ink);
-  overflow:hidden;
+/* ── REPORT VISUAL ── */
+.report-card{
+  background:var(--bg2);border:1px solid var(--line);
+  border-radius:14px;overflow:hidden;
 }
-.preview-inner { max-width:900px; margin:0 auto; }
-.preview-head { text-align:center; margin-bottom:3rem; }
-.preview-head .section-kicker { color:var(--gold2); }
-.preview-head .section-h2 { color:#fff; }
-.preview-head .section-sub { color:rgba(255,255,255,.45); }
-
-.preview-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
-@media(max-width:700px){ .preview-cards { grid-template-columns:1fr; } }
-
-.prev-card {
-  background:#1c1a16; border:1px solid rgba(255,255,255,.08);
-  border-radius:var(--r); overflow:hidden;
+.rc-bar{
+  background:rgba(0,0,0,.25);border-bottom:1px solid var(--line);
+  padding:.6rem .9rem;display:flex;align-items:center;gap:.5rem;
 }
-.prev-card-hd {
-  padding:.9rem 1.1rem; background:rgba(255,255,255,.04);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
-  color:rgba(255,255,255,.4);
-  display:flex; align-items:center; justify-content:space-between;
+.rc-dots span{
+  display:inline-block;width:7px;height:7px;
+  border-radius:50%;margin-right:3px;
 }
-.prev-card-dot { width:8px; height:8px; border-radius:50%; background:var(--gold); }
-.prev-card-body { padding:1.1rem; }
-
-/* Mini report preview */
-.mini-meter-row { display:flex; gap:8px; margin-bottom:.9rem; }
-.mini-meter {
-  flex:1; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
-  border-radius:8px; padding:.6rem; text-align:center;
+.d1{background:#ff5f57;}.d2{background:#febc2e;}.d3{background:#28c840;}
+.rc-lbl{font-size:10px;font-weight:600;letter-spacing:.05em;color:var(--muted);}
+.rc-body{padding:1rem;}
+.rc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.75rem;}
+.rc-name{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--bright);letter-spacing:.03em;}
+.rc-meta{font-size:9px;color:var(--muted);margin-top:2px;}
+.rc-badges{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
+.badge{font-size:8px;font-weight:700;padding:2px 7px;border-radius:10px;letter-spacing:.04em;}
+.bg-gold{background:rgba(200,137,10,.15);color:var(--gold2);}
+.bg-green{background:rgba(44,184,122,.1);color:var(--green);}
+.divider{height:1px;background:var(--line);margin:.6rem 0;}
+.row{display:flex;gap:7px;align-items:flex-start;margin-bottom:.5rem;}
+.row:last-of-type{margin-bottom:0;}
+.rdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.rdg{background:var(--gold);}
+.rdgr{background:var(--green);}
+.rdt{background:var(--teal);}
+.rl{font-size:8px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);min-width:48px;padding-top:1px;}
+.rv{font-size:11px;color:var(--text);line-height:1.45;}
+.pills{display:flex;flex-wrap:wrap;gap:3px;}
+.pill{font-size:8px;font-weight:600;padding:2px 6px;border-radius:8px;}
+.pgr{background:rgba(44,184,122,.1);color:var(--green);}
+.ptl{background:rgba(58,170,191,.1);color:var(--teal);}
+.note{
+  font-size:10px;font-style:italic;color:var(--dim);
+  margin-top:.6rem;padding:.4rem .6rem;
+  background:rgba(255,255,255,.03);
+  border-left:2px solid var(--gold);border-radius:0 5px 5px 0;
+  line-height:1.5;
 }
-.mini-meter-val { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--gold2); line-height:1; }
-.mini-meter-lbl { font-size:9px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-top:3px; }
-.mini-pill-row { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:.75rem; }
-.mini-pill { padding:3px 8px; border-radius:20px; font-size:10px; font-weight:600; }
-.mp-green { background:rgba(26,110,80,.2); color:#3ecb8a; }
-.mp-teal  { background:rgba(26,104,120,.2); color:#3aaabf; }
-.mini-text { font-size:11px; line-height:1.6; color:rgba(255,255,255,.45); }
-.mini-note { font-size:11px; font-style:italic; color:rgba(255,255,255,.35); border-left:2px solid var(--gold); padding-left:.6rem; margin-top:.65rem; }
+.prog-block{margin-top:.75rem;}
+.pb-lbl{font-size:8px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;}
+.pr{display:flex;align-items:center;gap:7px;margin-bottom:.3rem;}
+.pr-name{font-size:9px;color:var(--dim);min-width:56px;}
+.pr-track{flex:1;height:3px;background:var(--line);border-radius:2px;overflow:hidden;}
+.pr-fill{height:100%;border-radius:2px;}
+.pf-g{background:var(--gold);}
+.pf-gr{background:var(--green);}
+.pf-t{background:var(--teal);}
+.pr-pct{font-size:9px;min-width:24px;text-align:right;}
 
-/* Mini progress bars */
-.mini-prog { margin-bottom:.5rem; }
-.mini-prog:last-child { margin-bottom:0; }
-.mini-prog-head { display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.45); margin-bottom:3px; }
-.mini-prog-track { height:5px; background:rgba(255,255,255,.08); border-radius:3px; overflow:hidden; }
-.mini-prog-fill { height:100%; border-radius:3px; }
-.mpf-gold  { background:var(--gold); }
-.mpf-green { background:#3ecb8a; }
-.mpf-teal  { background:#3aaabf; }
-
-/* Mini history */
-.mini-hist { display:flex; align-items:center; gap:8px; padding:.5rem 0; border-bottom:1px solid rgba(255,255,255,.06); }
-.mini-hist:last-child { border-bottom:none; }
-.mh-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
-.mh-dot-gold  { background:var(--gold); }
-.mh-dot-green { background:#3ecb8a; }
-.mh-body { flex:1; min-width:0; }
-.mh-name { font-size:11px; font-weight:600; color:rgba(255,255,255,.6); }
-.mh-meta { font-size:10px; color:rgba(255,255,255,.3); }
-.mh-score { font-family:'Playfair Display',serif; font-size:12px; color:var(--gold2); }
-
-/* ── FINAL CTA ── */
-.final-cta {
-  padding:6rem 1.5rem;
-  background:var(--ink);
-  text-align:center;
-  position:relative; overflow:hidden;
+/* ── THREE PILLARS ── */
+.pillars{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;margin-top:3rem;
 }
-.final-cta::before {
-  content:'';
-  position:absolute; inset:0;
-  background:radial-gradient(ellipse at 50% 0%, rgba(212,146,12,.12) 0%, transparent 65%);
+@media(max-width:640px){.pillars{grid-template-columns:1fr;}}
+.pillar{background:var(--bg2);padding:2rem 1.5rem;}
+.p-icon{font-size:1.2rem;margin-bottom:.75rem;}
+.p-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.25rem;letter-spacing:.04em;
+  color:var(--bright);margin-bottom:.5rem;
+}
+.p-text{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ── CTA ── */
+.cta-sec{
+  text-align:center;padding:8rem 1.5rem;
+  position:relative;overflow:hidden;
+}
+.cta-sec::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 55% at 50% 0%,rgba(200,137,10,.09) 0%,transparent 65%);
   pointer-events:none;
 }
-.fcta-h2 {
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,5vw,3.2rem);
-  font-weight:900; letter-spacing:-.03em;
-  color:#fff; line-height:1.15;
-  max-width:580px; margin:0 auto;
-  position:relative;
+.cta-h{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.8rem,8vw,7rem);
+  letter-spacing:.01em;color:var(--bright);line-height:.93;
+  max-width:700px;margin:0 auto .75rem;position:relative;
 }
-.fcta-h2 em { color:var(--gold2); font-style:italic; }
-.fcta-sub {
-  font-size:1rem; color:rgba(255,255,255,.45);
-  max-width:400px; margin:.9rem auto 0; line-height:1.7;
-  position:relative;
+.cta-h em{color:var(--gold);font-family:'Instrument Serif',serif;font-style:italic;}
+.cta-sub{
+  font-family:'Instrument Serif',serif;
+  font-size:1.1rem;color:rgba(255,255,255,.38);
+  max-width:420px;margin:.75rem auto 2.25rem;
+  line-height:1.72;position:relative;
 }
-.fcta-actions { margin-top:2rem; display:flex; flex-direction:column; align-items:center; gap:.75rem; position:relative; }
-.fcta-proof { font-size:12px; color:rgba(255,255,255,.25); }
+.cta-note{font-size:11px;color:rgba(255,255,255,.17);margin-top:1rem;letter-spacing:.06em;position:relative;}
 
 /* ── FOOTER ── */
-footer {
-  background:var(--ink); border-top:1px solid rgba(255,255,255,.07);
-  padding:2rem 1.5rem;
-  display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:1rem;
+footer{
+  background:var(--bg2);border-top:1px solid var(--line);
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
 }
-.footer-logo {
-  font-family:'Playfair Display',serif;
-  font-size:1.1rem; font-weight:900; color:rgba(255,255,255,.5);
-}
-.footer-logo em { color:var(--gold); font-style:normal; }
-.footer-links { display:flex; gap:1.5rem; }
-.footer-links a { font-size:12px; color:rgba(255,255,255,.3); text-decoration:none; transition:color .15s; }
-.footer-links a:hover { color:rgba(255,255,255,.6); }
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:rgba(255,255,255,.22);letter-spacing:.05em;}
+.f-logo em{color:var(--gold);font-style:normal;}
+.f-links{display:flex;gap:1.25rem;}
+.f-links a{font-size:11px;color:rgba(255,255,255,.2);text-decoration:none;}
+.f-links a:hover{color:rgba(255,255,255,.45);}
 
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease;}
+.r.on{opacity:1;transform:translateY(0);}
+.rd{transition-delay:.1s;}
+.rd2{transition-delay:.2s;}
 
-
-/* Utility */
-.max-w { max-width:900px; margin:0 auto; }
+@keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
-  <div class="nav-logo">Trainer<em>IQ</em></div>
-  <div class="nav-links">
-    <a href="#how">How it works</a>
-    <a href="#preview">Product</a>
-  </div>
-  <button class="nav-cta" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Get early access</button>
+  <div class="logo">Trainer<em>IQ</em></div>
+  <button class="nav-cta" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Join the waitlist</button>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-bg-ring ring1"></div>
-  <div class="hero-bg-ring ring2"></div>
-  <div class="hero-bg-ring ring3"></div>
-
-  <div class="hero-label">For basketball trainers</div>
-
-  <h1 class="hero-h1">
-    Turn every session into a story <em>parents love.</em>
-  </h1>
-  <p class="hero-sub">
-    TrainerIQ uses AI to make post-session assessments faster and more professional — so parents see the value you deliver, every single workout.
-  </p>
-  <div class="hero-actions">
-    <button class="btn-primary" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Get early access — it's free</button>
-    <a href="#how" class="btn-ghost-lt">See how it works</a>
+  <div class="hero-eye">AI-powered · Athlete development intelligence · Youth sports</div>
+  <h1>Run your business.<br>Show parents the <em>work.</em></h1>
+  <p class="hero-sub">TrainerIQ gives private sports trainers a smarter way to manage their business — and gives parents <em>visibility into every session.</em> Scheduling, booking, payments, and AI-powered development reports. All in one place.</p>
+  <div class="hero-btns">
+    <button class="btn-gold" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Join the waitlist — free</button>
+    <a href="#how" class="btn-outline">See how it works →</a>
   </div>
-  <div class="hero-proof">
-    <span>No credit card required</span> &nbsp;·&nbsp; <span>30-second setup</span> &nbsp;·&nbsp; <span>Cancel anytime</span>
-  </div>
+  <div class="hero-note">No app download · SMS + email delivery · Free during beta</div>
 </section>
 
-<!-- ── TICKER ── -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span>2-minute reports per athlete</span>
-    <span>Parent open rate over 90%</span>
-    <span>Works for 1-on-1 and group sessions</span>
-    <span>AI-powered · trainer-controlled</span>
-    <span>Builds loyalty and referrals</span>
-    <span>2-minute reports per athlete</span>
-    <span>Parent open rate over 90%</span>
-    <span>Works for 1-on-1 and group sessions</span>
-    <span>AI-powered · trainer-controlled</span>
-    <span>Builds loyalty and referrals</span>
-  </div>
-</div>
+<!-- ══ HOW IT WORKS ══ -->
+<section class="sec" id="how" style="background:var(--bg2);">
+  <div class="inner">
+    <div class="how-grid">
 
-<!-- ── PROBLEM ── -->
-<section class="problem">
-  <div class="max-w">
-    <div class="section-kicker">The real problem</div>
-    <h2 class="section-h2">Parents pay premium prices. They can't see <em>what they're paying for.</em></h2>
-    <p class="section-sub">You're doing incredible work in the gym. But parents only see what their kid tells them — which is usually nothing.</p>
-
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-emoji">😤</div>
-        <div class="pain-title">Parents get anxious</div>
-        <div class="pain-text">Without visibility into sessions, parents start questioning if training is working — and whether the investment is worth it.</div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-emoji">📉</div>
-        <div class="pain-title">Clients quietly churn</div>
-        <div class="pain-text">Families who don't feel connected to the training journey are the first to pause sessions when budgets get tight.</div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-emoji">🗣️</div>
-        <div class="pain-title">Referrals don't happen</div>
-        <div class="pain-text">Parents who are wowed by your professionalism become your best marketing. Parents in the dark stay quiet.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── HOW IT WORKS ── -->
-<section class="how" id="how">
-  <div class="max-w">
-    <div class="section-kicker">How it works</div>
-    <h2 class="section-h2">Three steps. Two minutes. One <em>delighted</em> parent.</h2>
-    <p class="section-sub">TrainerIQ fits into your workflow — not the other way around.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Fill the quick form</div>
-        <div class="step-text">Select skills worked on, rate effort and focus, tag strengths and areas to develop. No typing required — takes under 2 minutes per athlete.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">AI powers the report</div>
-        <div class="step-text">TrainerIQ turns your assessment into a warm, professional parent report in seconds — your observations, your voice, structured and polished automatically. Review and publish in one tap.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Parents see everything</div>
-        <div class="step-text">Families get notified and log into a beautiful portal showing session reports, skill progress over time, and at-home drills. They feel like VIPs.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── PRODUCT PREVIEW ── -->
-<section class="preview" id="preview">
-  <div class="preview-inner">
-    <div class="preview-head">
-      <div class="section-kicker">The product</div>
-      <h2 class="section-h2" style="color:#fff">Everything you need. <em style="color:var(--gold2)">Nothing you don't.</em></h2>
-      <p class="section-sub">Three views. Trainer dashboard, session report, parent portal.</p>
-    </div>
-
-    <div class="preview-cards">
-
-      <!-- Session report preview -->
-      <div class="prev-card">
-        <div class="prev-card-hd">
-          Session Report
-          <div class="prev-card-dot"></div>
-        </div>
-        <div class="prev-card-body">
-          <div class="mini-meter-row">
-            <div class="mini-meter">
-              <div class="mini-meter-val">5</div>
-              <div class="mini-meter-lbl">Effort</div>
-            </div>
-            <div class="mini-meter">
-              <div class="mini-meter-val">4</div>
-              <div class="mini-meter-lbl">Focus</div>
+      <div>
+        <div class="kicker r">How it works</div>
+        <h2 class="r">One loop.<br>Six steps.<br><em>Fully closed.</em></h2>
+        <p class="sec-sub r" style="margin-bottom:0;">From the first booking to the next session recommendation — TrainerIQ closes the loop between trainer and parent automatically. Development compounds with every session.</p>
+        <div class="steps r rd">
+          <div class="step">
+            <div class="step-dot">📅</div>
+            <div class="step-body">
+              <div class="step-title">Trainer sets availability</div>
+              <div class="step-text">Share a booking link. Parents book and pay directly. No texts, no chasing.</div>
             </div>
           </div>
-          <div class="mini-pill-row">
-            <span class="mini-pill mp-green">Pull-up jumper</span>
-            <span class="mini-pill mp-green">Footwork</span>
-            <span class="mini-pill mp-teal">Weak hand ↑</span>
+          <div class="step">
+            <div class="step-dot">💳</div>
+            <div class="step-body">
+              <div class="step-title">Parent books + pays</div>
+              <div class="step-text">Simple checkout. Payment collected at booking. Session confirmed automatically.</div>
+            </div>
           </div>
-          <div class="mini-text">Marcus had a breakthrough with his pull-up off the dribble — his footwork is clicking in a way that's creating clean looks every time.</div>
-          <div class="mini-note">"He brought a different energy today. We're in a great place." — Darryl R.</div>
+          <div class="step">
+            <div class="step-dot">🏀</div>
+            <div class="step-body">
+              <div class="step-title">Session happens</div>
+              <div class="step-text">Trainer does what they do best. TrainerIQ stays out of the way.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">⚡</div>
+            <div class="step-body">
+              <div class="step-title">60-second recap</div>
+              <div class="step-text">Skills worked on. Effort rating. A quick note. Done in the parking lot.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">✉️</div>
+            <div class="step-body">
+              <div class="step-title">Parent receives the report</div>
+              <div class="step-text">Via SMS and email — no app download. Skills trained, biggest win, what's next, and three at-home drills specific to this session's gaps.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-dot">🔄</div>
+            <div class="step-body">
+              <div class="step-title">Parent acts — loop repeats</div>
+              <div class="step-text">Parent practices at home with the athlete. Sees the skills gap. Books the next session to close it. Development compounds. Trainer revenue compounds with it.</div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Progress preview -->
-      <div class="prev-card">
-        <div class="prev-card-hd">
-          Skill Progress
-          <div class="prev-card-dot" style="background:#3ecb8a"></div>
-        </div>
-        <div class="prev-card-body">
-          <div class="mini-prog">
-            <div class="mini-prog-head"><span>Shooting</span><span style="color:var(--gold2)">82%</span></div>
-            <div class="mini-prog-track"><div class="mini-prog-fill mpf-gold" style="width:82%"></div></div>
+      <!-- REPORT VISUAL -->
+      <div class="r rd2">
+        <div class="report-card">
+          <div class="rc-bar">
+            <div class="rc-dots"><span class="d1"></span><span class="d2"></span><span class="d3"></span></div>
+            <div class="rc-lbl">Session Report · Jordan Williams</div>
           </div>
-          <div class="mini-prog">
-            <div class="mini-prog-head"><span>Footwork</span><span style="color:#3ecb8a">70%</span></div>
-            <div class="mini-prog-track"><div class="mini-prog-fill mpf-green" style="width:70%"></div></div>
-          </div>
-          <div class="mini-prog" style="margin-bottom:.9rem">
-            <div class="mini-prog-head"><span>Ball handling</span><span style="color:#3aaabf">55%</span></div>
-            <div class="mini-prog-track"><div class="mini-prog-fill mpf-teal" style="width:55%"></div></div>
-          </div>
-          <div class="mini-text">Built from 18 sessions across 3 months of training.</div>
-        </div>
-      </div>
-
-      <!-- Client roster preview -->
-      <div class="prev-card">
-        <div class="prev-card-hd">
-          Client Roster
-          <div class="prev-card-dot" style="background:#3aaabf"></div>
-        </div>
-        <div class="prev-card-body">
-          <div class="mini-hist">
-            <div class="mh-dot mh-dot-gold"></div>
-            <div class="mh-body">
-              <div class="mh-name">Marcus Johnson</div>
-              <div class="mh-meta">Shooting · 18 sessions</div>
+          <div class="rc-body">
+            <div class="rc-head">
+              <div>
+                <div class="rc-name">Jordan Williams</div>
+                <div class="rc-meta">14 yrs · 1-on-1 · Shooting · May 1, 2026</div>
+              </div>
+              <div class="rc-badges">
+                <span class="badge bg-gold">Effort 5/5</span>
+                <span class="badge bg-green">Focus 4/5</span>
+              </div>
             </div>
-            <div class="mh-score">5/5</div>
-          </div>
-          <div class="mini-hist">
-            <div class="mh-dot mh-dot-green"></div>
-            <div class="mh-body">
-              <div class="mh-name">Ava Thompson</div>
-              <div class="mh-meta">Ball handling · 11 sessions</div>
+            <div class="divider"></div>
+            <div class="row">
+              <div class="rdot rdg"></div>
+              <div class="rl">Skills</div>
+              <div class="rv">
+                <div class="pills">
+                  <span class="pill pgr">Pull-up jumper</span>
+                  <span class="pill pgr">Catch &amp; shoot</span>
+                  <span class="pill pgr">Footwork</span>
+                  <span class="pill ptl">Weak hand ↑</span>
+                </div>
+              </div>
             </div>
-            <div class="mh-score">4/5</div>
-          </div>
-          <div class="mini-hist">
-            <div class="mh-dot" style="background:#3aaabf"></div>
-            <div class="mh-body">
-              <div class="mh-name">Tyler Brooks</div>
-              <div class="mh-meta">Full workout · 24 sessions</div>
+            <div class="row">
+              <div class="rdot rdgr"></div>
+              <div class="rl">Win</div>
+              <div class="rv">Pull-up off the dribble finally clicked. Footwork creating clean looks every time.</div>
             </div>
-            <div class="mh-score">5/5</div>
-          </div>
-          <div class="mini-hist">
-            <div class="mh-dot" style="background:#c080ff"></div>
-            <div class="mh-body">
-              <div class="mh-name">Jordan Kim</div>
-              <div class="mh-meta">Post moves · 9 sessions</div>
+            <div class="row">
+              <div class="rdot rdt"></div>
+              <div class="rl">Next</div>
+              <div class="rv">Left hand development — unlocks a new dimension of his game.</div>
             </div>
-            <div class="mh-score">4/5</div>
+            <div class="row">
+              <div class="rdot rdg"></div>
+              <div class="rl">At home</div>
+              <div class="rv">100 left-hand shots · 2-ball dribbling 5 min · 5 pull-ups per spot</div>
+            </div>
+            <div class="note">"Jordan brought a different energy today. You could feel it from rep one." — Mack L.</div>
+            <div class="prog-block">
+              <div class="pb-lbl">Development over time</div>
+              <div class="pr"><div class="pr-name">Shooting</div><div class="pr-track"><div class="pr-fill pf-g" style="width:82%"></div></div><div class="pr-pct" style="color:var(--gold)">82%</div></div>
+              <div class="pr"><div class="pr-name">Footwork</div><div class="pr-track"><div class="pr-fill pf-gr" style="width:70%"></div></div><div class="pr-pct" style="color:var(--green)">70%</div></div>
+              <div class="pr"><div class="pr-name">Ball handling</div><div class="pr-track"><div class="pr-fill pf-t" style="width:48%"></div></div><div class="pr-pct" style="color:var(--teal)">48%</div></div>
+            </div>
+            <div style="margin-top:.75rem;padding:.6rem .75rem;background:rgba(200,137,10,.08);border:1px solid rgba(200,137,10,.2);border-radius:8px;display:flex;align-items:center;justify-content:space-between;gap:.5rem;">
+              <div>
+                <div style="font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;">Next step</div>
+                <div style="font-size:10px;color:var(--text);line-height:1.4;">Book Jordan's next session to work on weak hand development.</div>
+              </div>
+              <div style="background:var(--gold);color:var(--bg);font-size:9px;font-weight:700;padding:5px 10px;border-radius:5px;white-space:nowrap;flex-shrink:0;">Book now →</div>
+            </div>
           </div>
         </div>
       </div>
@@ -557,26 +408,79 @@ footer {
   </div>
 </section>
 
-<!-- ── FINAL CTA ── -->
-<section class="final-cta">
-  <h2 class="fcta-h2">Your next client is a <em>referral away.</em></h2>
-  <p class="fcta-sub">Join the trainers making parents feel like partners in their athlete's development.</p>
-  <div class="fcta-actions">
-    <button class="btn-primary" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave" style="font-size:16px; padding:16px 36px;">Get early access — free</button>
-    <div class="fcta-proof">Beta is free. Launching to the public in Summer 2026.</div>
+<!-- ══ WHY IT MATTERS ══ -->
+<section class="sec" style="background:var(--bg);">
+  <div class="inner">
+    <div class="kicker r">Why it matters</div>
+    <h2 class="r">Built for development.<br>Not <em>logistics.</em></h2>
+    <p class="sec-sub r">Every other tool sends invoices and calendar reminders. TrainerIQ sends insight. That's the difference.</p>
+    <div class="pillars r rd">
+      <div class="pillar">
+        <div class="p-icon">🧠</div>
+        <div class="p-title">Development intelligence</div>
+        <div class="p-text">Every session builds on the last. Over time TrainerIQ understands each athlete's trajectory — what's clicking, what needs work, what's improved across months of training.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-icon">💛</div>
+        <div class="p-title">Parent retention</div>
+        <div class="p-text">Parents who see their child's progress after every session don't question the investment. They stay. They refer. The trainers who communicate best keep clients the longest.</div>
+      </div>
+      <div class="pillar">
+        <div class="p-icon">⚡</div>
+        <div class="p-title">Zero friction delivery</div>
+        <div class="p-text">No app for parents to download. Reports arrive via SMS and email — where parents already are. Open rates above 90% because there's no barrier between the report and the parent.</div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ══ QUOTES ══ -->
+<section class="sec" style="background:var(--bg2);padding:5rem 1.5rem;">
+  <div class="inner">
+    <div class="kicker r" style="justify-content:center;text-align:center;">What people are saying</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem;" class="r rd">
+      <div style="background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:1.75rem;position:relative;">
+        <div style="font-size:2rem;color:var(--gold);opacity:.25;font-family:'Instrument Serif',serif;line-height:1;margin-bottom:.5rem;">"</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:1.1rem;font-style:italic;color:var(--bright);line-height:1.6;margin-bottom:1rem;">This is brilliant. The report I get today doesn't tell me much.</div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);">Parent · Youth basketball athlete</div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:1.75rem;position:relative;">
+        <div style="font-size:2rem;color:var(--gold);opacity:.25;font-family:'Instrument Serif',serif;line-height:1;margin-bottom:.5rem;">"</div>
+        <div style="font-family:'Instrument Serif',serif;font-size:1.1rem;font-style:italic;color:var(--bright);line-height:1.6;margin-bottom:1rem;">If you're looking for a gap in this business it's the operations software. Huge opportunity.</div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);">Private basketball trainer · Personal network</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta-sec">
+  <div class="inner">
+    <h2 class="cta-h r">Make every<br>session <em>visible.</em></h2>
+    <p class="cta-sub r">Join the trainers turning a 60-second recap into the most professional parent communication in youth sports.</p>
+    <div class="r">
+      <button class="btn-gold" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave" style="font-size:15px;padding:16px 40px;">Join the waitlist — free</button>
+    </div>
+    <div class="cta-note r">No credit card · No app download · Free during beta</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Trainer<em>IQ</em></div>
-  <div class="footer-links">
+  <div class="f-logo">Trainer<em>IQ</em></div>
+  <div class="f-links">
     <a href="#">Privacy</a>
     <a href="#">Terms</a>
-    <a href="#">Contact</a>
+    <a href="mailto:darryl@gettraineriq.com">Contact</a>
   </div>
 </footer>
 
 <script async src="https://tally.so/widgets/embed.js"></script>
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.r').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>

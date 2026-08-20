@@ -3,225 +3,1102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TrainerIQ — Request Early Access (Trainers &amp; Coaches)</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>TrainerIQ — Every athlete deserves a development plan.</title>
+<meta name="description" content="TrainerIQ helps coaches and trainers assess, plan, track, and continuously improve the development of every athlete they work with.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
+
+<!-- Open Graph / social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gettraineriq.com/">
+<meta property="og:title" content="TrainerIQ — Every athlete deserves a development plan.">
+<meta property="og:description" content="TrainerIQ helps coaches and trainers assess, plan, track, and continuously improve the development of every athlete they work with.">
+<meta property="og:image" content="https://gettraineriq.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TrainerIQ — Every athlete deserves a development plan.">
+<meta name="twitter:description" content="TrainerIQ helps coaches and trainers assess, plan, track, and continuously improve the development of every athlete they work with.">
+<meta name="twitter:image" content="https://gettraineriq.com/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;}
+/* ============ TOKENS ============ */
+:root{
+  /* TrainerIQ brand palette — pulled from gettraineriq.com, applied on a light page */
+  --ink:#17140F;          /* primary text & headings (dark, warm near-black) */
+  --ink-soft:#4A453C;     /* body text */
+  --paper:#FAF8F4;        /* page background — soft warm white */
+  --paper-alt:#FFFFFF;    /* card surface — pure white, for contrast/pop against the page */
+  --surface-ink:#14120D;  /* dark section background, used for on-ink contrast sections */
+  --line:#E8E4D9;         /* borders on light surfaces */
+  --line-ink:#332F27;     /* borders on dark surfaces */
+  --muted:#756F63;        /* secondary text on light */
+  --muted-on-ink:#9C9686; /* secondary text on dark */
+  --signal:#C8890A;       /* primary accent gold */
+  --signal-soft:rgba(200,137,10,0.08);
+  --signal-ink:#F0B429;   /* bright gold accent, used on dark sections */
+  --data:#C8890A;         /* secondary marker gold, tuned down slightly for light bg */
+  --data-soft:rgba(200,137,10,0.08);
+  --data-ink:#F0B429;
+  --good:#1E9A5D;         /* green — progress/positive, darkened for contrast on white */
+  --danger:#C94A44;       /* warm red — live/urgent status, darkened for contrast on white */
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:22px;
+  --maxw:1160px;
+  --font-display:'Fraunces', Georgia, serif;
+  --font-body:'Inter', sans-serif;
+  --font-mono:'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+}
 body{
-  font-family:'Figtree',sans-serif;
-  background:#0d0c0a;
-  color:#d8d5ce;
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.5;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
-:root{
-  --bg:#0d0c0a;--bg2:#141210;--bg3:#1a1814;--line:#272420;
-  --muted:#5a5750;--dim:#8a8780;--text:#d8d5ce;--bright:#f5f2ea;
-  --gold:#c8890a;--gold2:#f0b429;--gold-dim:rgba(200,137,10,.08);
-  --green:#2cb87a;
+img,svg{display:block; max-width:100%;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit; cursor:pointer;}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+@media (max-width:640px){ .wrap{padding:0 20px;} }
+
+h1,h2,h3,h4{font-family:var(--font-display); font-weight:500; letter-spacing:-0.01em; line-height:1.1;}
+.eyebrow{
+  font-family:var(--font-mono); font-size:12.5px; letter-spacing:0.08em; text-transform:uppercase;
+  color:var(--signal); display:flex; align-items:center; gap:8px; margin-bottom:18px; font-weight:500;
 }
-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(13,12,10,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
-.logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;color:var(--bright);text-decoration:none;}
-.logo em{color:var(--gold);font-style:normal;}
-.nav-right{display:flex;align-items:center;gap:1.5rem;}
-.nav-switch{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.02em;transition:color .15s;}
-.nav-switch:hover{color:var(--text);}
-.nav-btn{background:var(--gold);color:var(--bg);font-family:'Figtree',sans-serif;font-size:13px;font-weight:700;padding:9px 22px;border-radius:6px;border:none;cursor:pointer;letter-spacing:.02em;transition:background .15s;text-decoration:none;display:inline-block;}
-.nav-btn:hover{background:var(--gold2);}
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:60px;position:relative;}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 3.5rem 5rem 4rem;position:relative;z-index:2;}
-.hero-left::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 50%, rgba(200,137,10,.05) 0%, transparent 70%);pointer-events:none;}
-.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem;display:flex;align-items:center;gap:.75rem;position:relative;}
-.eyebrow::before{content:'';display:inline-block;width:24px;height:1.5px;background:var(--gold);flex-shrink:0;}
-.headline{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.7rem,5.4vw,4.7rem);line-height:.97;letter-spacing:-.01em;text-transform:uppercase;color:var(--bright);margin-bottom:.3rem;position:relative;}
-.headline-gold{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.7rem,5.4vw,4.7rem);line-height:.97;letter-spacing:-.01em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:2.2rem;position:relative;}
-.h-rule{width:48px;height:2px;background:var(--gold);margin-bottom:1.8rem;position:relative;}
-.bridge{font-family:'Figtree',sans-serif;font-size:1.05rem;font-weight:400;line-height:1.65;color:rgba(216,213,206,.55);max-width:460px;margin-bottom:2.8rem;position:relative;}
-.bridge strong{color:rgba(216,213,206,.85);font-weight:500;}
-.cta-group{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;position:relative;}
-.btn-primary{background:var(--gold);color:var(--bg);font-family:'Figtree',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:7px;border:none;cursor:pointer;letter-spacing:.02em;transition:all .15s;text-decoration:none;display:inline-block;white-space:nowrap;}
-.btn-primary:hover{background:var(--gold2);transform:translateY(-1px);}
-.cohort-label{display:flex;flex-direction:column;gap:2px;}
-.cohort-main{font-size:12px;font-weight:600;color:var(--dim);letter-spacing:.05em;text-transform:uppercase;}
-.cohort-sub{font-size:11px;color:var(--muted);letter-spacing:.02em;}
-.tension{margin-top:3.5rem;padding-top:2rem;border-top:1px solid var(--line);font-family:'Figtree',sans-serif;font-size:.875rem;color:var(--muted);line-height:1.6;max-width:420px;position:relative;}
-.hero-right{position:relative;display:flex;align-items:center;justify-content:center;padding:5rem 3rem 5rem 2rem;overflow:hidden;}
-.hero-right::before{content:'';position:absolute;left:0;top:15%;bottom:15%;width:1px;background:linear-gradient(to bottom, transparent, var(--line) 30%, var(--line) 70%, transparent);}
-.hero-right::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 70% 50%, rgba(200,137,10,.04) 0%, transparent 70%);pointer-events:none;}
-.visual-stack{position:relative;width:100%;max-width:400px;z-index:2;}
-.gym-panel{background:var(--bg3);border:1px solid var(--line);border-radius:12px;padding:1.5rem;margin-bottom:1rem;position:relative;overflow:hidden;}
-.gym-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right, transparent, var(--muted), transparent);}
-.panel-label{font-size:9.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
-.panel-label::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--muted);}
-.session-row{display:flex;align-items:center;gap:1rem;padding:.65rem 0;border-bottom:1px solid rgba(42,40,32,.8);}
-.session-row:last-child{border-bottom:none;}
-.session-avatar{width:32px;height:32px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--muted);flex-shrink:0;font-family:'Barlow Condensed',sans-serif;letter-spacing:.02em;}
-.session-info{flex:1;}
-.session-name{font-size:12.5px;font-weight:600;color:var(--text);margin-bottom:2px;}
-.session-meta{font-size:10.5px;color:var(--muted);}
-.session-status{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;letter-spacing:.05em;text-transform:uppercase;}
-.status-live{background:rgba(44,184,122,.12);color:#2cb87a;border:1px solid rgba(44,184,122,.2);}
-.status-done{background:rgba(42,40,32,.6);color:var(--muted);border:1px solid var(--line);}
-.plan-panel{background:var(--bg3);border:1px solid rgba(200,137,10,.18);border-radius:12px;padding:1.25rem 1.5rem;position:relative;overflow:hidden;}
-.plan-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right, var(--gold), transparent 60%);}
-.plan-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.1rem;}
-.plan-icon{width:34px;height:34px;border-radius:9px;background:rgba(200,137,10,.12);border:1px solid rgba(200,137,10,.2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
-.plan-title{font-size:13px;font-weight:700;color:var(--bright);margin-bottom:1px;}
-.plan-time{font-size:10.5px;color:var(--muted);}
-.goal-list{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:8px;padding:1rem 1.1rem;filter:blur(3.5px);user-select:none;pointer-events:none;}
-.goal-row{margin-bottom:12px;}
-.goal-row:last-child{margin-bottom:0;}
-.goal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.goal-label{width:52%;height:8px;border-radius:4px;background:rgba(216,213,206,.14);}
-.goal-chip{width:22%;height:14px;border-radius:4px;background:rgba(44,184,122,.3);}
-.goal-chip.mid{background:rgba(200,137,10,.3);}
-.goal-track{height:6px;border-radius:3px;background:rgba(42,40,32,.8);overflow:hidden;}
-.goal-fill{height:100%;border-radius:3px;background:rgba(200,137,10,.55);}
-.unblur-tag{margin-top:.75rem;text-align:center;font-size:10px;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;opacity:.7;}
-footer{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 2.5rem;border-top:1px solid var(--line);background:var(--bg2);flex-wrap:wrap;gap:.75rem;}
-.f-left{font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.05em;color:rgba(255,255,255,.18);display:flex;align-items:center;gap:.75rem;}
-.f-left em{color:rgba(200,137,10,.5);font-style:normal;}
-.f-copy{font-size:11px;color:var(--muted);}
-.f-links{display:flex;gap:1.5rem;}
-.f-links a{font-size:11px;color:var(--muted);text-decoration:none;transition:color .15s;}
-.f-links a:hover{color:var(--text);}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-.hero-left > *{animation:fadeUp .7s ease both;}
-.eyebrow{animation-delay:.1s;}
-.headline{animation-delay:.2s;}
-.headline-gold{animation-delay:.25s;}
-.h-rule{animation-delay:.3s;}
-.bridge{animation-delay:.35s;}
-.cta-group{animation-delay:.45s;}
-.tension{animation-delay:.55s;}
-.visual-stack{animation:fadeUp .8s .4s ease both;}
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-left{padding:4rem 2rem 2.5rem;}
-  .hero-right{padding:2rem 2rem 4rem;}
-  .hero-right::before{display:none;}
+.eyebrow::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--signal); display:inline-block;}
+.eyebrow.on-ink{color:var(--signal-ink);}
+.eyebrow.on-ink::before{background:var(--signal-ink);}
+.eyebrow.data{color:var(--data);}
+.eyebrow.data::before{background:var(--data);}
+
+.section-head{max-width:640px; margin-bottom:56px;}
+.section-head h2{font-size:clamp(28px,4vw,42px); margin-bottom:16px;}
+.section-head p{font-size:17px; color:var(--muted); line-height:1.6;}
+section.on-ink .section-head p{color:var(--muted-on-ink);}
+
+.btn{
+  display:inline-flex; align-items:center; gap:8px; padding:13px 24px; border-radius:999px;
+  font-family:var(--font-body); font-weight:600; font-size:14.5px; border:1px solid transparent;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  white-space:nowrap;
+}
+.btn-primary{background:var(--ink); color:var(--paper);}
+.btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(0,0,0,0.18);}
+.btn-signal{background:var(--signal); color:#fff;}
+.btn-signal:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(200,137,10,0.32);}
+.btn-ghost{background:transparent; color:var(--ink); border-color:var(--line);}
+.btn-ghost:hover{border-color:var(--ink);}
+.btn-ghost.on-ink{color:var(--paper); border-color:var(--line-ink);}
+.btn-ghost.on-ink:hover{border-color:var(--muted-on-ink);}
+.btn-sm{padding:9px 16px; font-size:13px;}
+
+.pill{
+  font-family:var(--font-mono); font-size:11px; font-weight:500; padding:3px 9px; border-radius:999px;
+  letter-spacing:0.02em;
+}
+.pill-live{background:rgba(201,74,68,0.12); color:var(--danger);}
+.pill-done{background:var(--signal-soft); color:var(--signal);}
+.pill-next{background:var(--line); color:var(--muted);}
+
+/* ============ NAV ============ */
+header.nav{
+  position:sticky; top:0; z-index:100; background:rgba(250,248,244,0.86); backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; height:72px;}
+.logo{font-family:var(--font-display); font-weight:700; font-size:20px; letter-spacing:-0.02em; display:flex; align-items:center; gap:2px;}
+.logo em{font-style:normal; color:var(--signal);}
+.nav-links{display:flex; align-items:center; gap:34px; font-size:14.5px; font-weight:500;}
+.nav-links a{color:var(--ink-soft); transition:color .15s ease;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{display:flex; align-items:center; gap:14px;}
+.nav-mobile-toggle{display:none; background:none; border:none; padding:8px;}
+.nav-mobile-toggle span, .nav-mobile-toggle span::before, .nav-mobile-toggle span::after{
+  content:''; display:block; width:22px; height:2px; background:var(--ink); position:relative; transition:all .2s ease;
+}
+.nav-mobile-toggle span::before{position:absolute; top:-7px;}
+.nav-mobile-toggle span::after{position:absolute; top:7px;}
+.mobile-menu{display:none; flex-direction:column; gap:2px; padding:8px 0 24px; border-top:1px solid var(--line);}
+.mobile-menu a{padding:14px 4px; font-size:15.5px; font-weight:500; border-bottom:1px solid var(--line);}
+.mobile-menu.open{display:flex;}
+
+@media (max-width:860px){
+  .nav-links{display:none;}
+  .nav-cta .btn-ghost{display:none;}
+  .nav-mobile-toggle{display:block;}
 }
 </style>
-</head>
+
+<style>
+/* ============ HERO ============ */
+.hero{position:relative; padding:96px 0 64px; overflow:hidden;}
+.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;}
+@media (max-width:960px){ .hero-grid{grid-template-columns:1fr; gap:48px;} }
+
+.hero-copy h1{font-size:clamp(38px,5.4vw,60px); margin-bottom:22px;}
+.hero-copy h1 .accent{color:var(--signal);}
+.hero-copy .sub{font-size:18px; color:var(--muted); max-width:480px; margin-bottom:32px; line-height:1.65;}
+
+.loop-row{display:flex; align-items:center; flex-wrap:wrap; gap:0; margin-bottom:38px; font-family:var(--font-mono); font-size:13px; font-weight:500;}
+.loop-step{display:flex; align-items:center; gap:8px; padding:8px 14px 8px 0;}
+.loop-step .dot{width:7px; height:7px; border-radius:50%; background:var(--ink); opacity:0.25;}
+.loop-step.active .dot{background:var(--signal); opacity:1;}
+.loop-step span.label{color:var(--ink-soft); letter-spacing:0.01em;}
+.loop-arrow{color:var(--line); margin:0 2px;}
+@media (max-width:520px){ .loop-row{font-size:11.5px;} .loop-arrow{display:none;} .loop-step{width:33%; padding:6px 0;} }
+
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:20px;}
+.hero-note{font-size:13px; color:var(--muted); font-family:var(--font-mono);}
+
+/* Hero device: athlete card */
+.hero-visual{position:relative;}
+.device-card{
+  background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-lg);
+  padding:26px 26px 22px; box-shadow:0 30px 60px -20px rgba(0,0,0,0.18);
+  position:relative; z-index:2;
+}
+.device-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:22px;}
+.device-top .dtitle{font-family:var(--font-mono); font-size:11.5px; color:var(--muted); letter-spacing:0.04em; text-transform:uppercase;}
+.device-live{display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:11px; color:var(--danger);}
+.device-live .dot{width:6px; height:6px; border-radius:50%; background:var(--danger); animation:pulse 1.8s infinite;}
+@keyframes pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
+
+.dtop-athlete{display:flex; align-items:center; gap:12px;}
+.dtop-avatar{width:38px; height:38px; border-radius:50%; background:var(--signal); color:var(--paper); font-family:var(--font-mono); font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+.dtop-name{font-size:14.5px; font-weight:600; color:var(--ink);}
+
+.hero-score-row{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
+.hero-score .score-value{font-size:40px;}
+.hero-mini-stats{display:flex; gap:10px;}
+.hmini{display:flex; flex-direction:column; align-items:center; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-sm); padding:8px 12px; min-width:64px;}
+.hmini .hv{font-family:var(--font-mono); font-size:15px; font-weight:600; color:var(--good);}
+.hmini .hl{font-size:10px; color:var(--muted); margin-top:2px;}
+
+.hero-priorities{margin-bottom:20px;}
+
+.plan-update{
+  display:flex; align-items:center; gap:12px; padding:14px; border-radius:var(--radius-sm);
+  background:var(--signal-soft); border:1px solid rgba(200,137,10,0.28);
+}
+.plan-update .icon{width:32px; height:32px; border-radius:50%; background:var(--signal); flex-shrink:0; display:flex; align-items:center; justify-content:center;}
+.plan-update .icon svg{width:15px; height:15px;}
+.plan-update-text{font-size:12.5px; line-height:1.4; color:var(--ink-soft);}
+.plan-update-text b{font-weight:600; color:var(--ink);}
+.plan-update-text .ts{color:var(--muted); font-family:var(--font-mono); font-size:11px;}
+
+.device-glow{position:absolute; inset:-40px; background:radial-gradient(circle at 65% 30%, rgba(200,137,10,0.16), transparent 60%); z-index:1;}
+@media (max-width:640px){ .hero-score-row{flex-direction:column; align-items:flex-start;} }
+
+/* ============ PROBLEM ============ */
+.problem{padding:120px 0 100px;}
+.problem-grid{display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .problem-grid{grid-template-columns:1fr; gap:48px;} }
+.problem-copy h2{font-size:clamp(26px,3.6vw,36px); margin-bottom:20px; max-width:480px;}
+.problem-copy p{color:var(--muted); font-size:16.5px; line-height:1.7; margin-bottom:16px; max-width:460px;}
+.problem-copy .callout{
+  font-family:var(--font-display); font-size:19px; font-weight:600; color:var(--ink);
+  border-left:2px solid var(--signal); padding-left:18px; margin-top:28px; max-width:420px;
+}
+
+/* orbit diagram */
+.orbit{position:relative; width:100%; max-width:460px; margin:0 auto; aspect-ratio:1/0.86;}
+.orbit-center{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:var(--ink); color:var(--paper); border-radius:999px; padding:16px 26px;
+  font-family:var(--font-display); font-weight:600; font-size:15px; z-index:3;
+  box-shadow:0 20px 40px -14px rgba(0,0,0,0.3); text-align:center; white-space:nowrap;
+}
+.orbit-node{
+  position:absolute; background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-md);
+  padding:11px 16px; font-size:13px; font-weight:600; box-shadow:0 8px 20px -8px rgba(0,0,0,0.12); z-index:2;
+}
+.orbit-node.n1{top:2%; left:50%; transform:translateX(-50%);}
+.orbit-node.n2{top:30%; right:0;}
+.orbit-node.n3{bottom:2%; right:14%;}
+.orbit-node.n4{bottom:2%; left:14%;}
+.orbit-node.n5{top:30%; left:0;}
+.orbit svg.lines{position:absolute; inset:0; width:100%; height:100%; z-index:1;}
+.orbit svg.lines line{stroke:var(--line); stroke-width:1.5; stroke-dasharray:4 4;}
+@media (max-width:520px){
+  .orbit-node{font-size:11.5px; padding:8px 11px;}
+  .orbit-center{font-size:12.5px; padding:12px 18px;}
+}
+
+/* ============ SOLUTION LOOP ============ */
+section.on-ink{background:var(--surface-ink); color:var(--paper);}
+.solution{padding:120px 0;}
+.solution .section-head h2{color:var(--paper);}
+
+.loop-track{display:grid; grid-template-columns:repeat(5,1fr); gap:0; position:relative; margin-top:8px;}
+.loop-track::before{
+  content:''; position:absolute; top:34px; left:6%; right:6%; height:1px; background:var(--line-ink); z-index:0;
+}
+@media (max-width:900px){ .loop-track{grid-template-columns:1fr; gap:0;} .loop-track::before{display:none;} }
+
+.loop-item{position:relative; z-index:1; padding:0 14px 0 0; cursor:pointer;}
+@media (max-width:900px){ .loop-item{padding:22px 0; border-bottom:1px solid var(--line-ink);} .loop-item:last-child{border-bottom:none;} }
+.loop-num{
+  font-family:var(--font-mono); font-size:13px; color:var(--muted-on-ink); background:var(--surface-ink);
+  border:1px solid var(--line-ink); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  margin-bottom:20px; transition:all .2s ease;
+}
+.loop-item.active .loop-num{background:var(--signal); border-color:var(--signal); color:#fff;}
+.loop-item h3{font-size:17px; color:var(--paper); margin-bottom:8px; font-weight:600;}
+.loop-item p{font-size:13.5px; color:var(--muted-on-ink); line-height:1.55; max-width:200px;}
+@media (max-width:900px){ .loop-item p{max-width:none;} }
+
+.loop-detail{
+  margin-top:56px; background:var(--paper-alt); border:1px solid var(--line-ink); border-radius:var(--radius-lg);
+  padding:36px 40px; min-height:150px; transition:opacity .25s ease;
+}
+.loop-detail-inner{display:none; align-items:center; gap:28px; flex-wrap:wrap;}
+.loop-detail-inner.show{display:flex;}
+.loop-detail-tag{
+  font-family:var(--font-mono); font-size:11px; color:var(--muted-on-ink); text-transform:uppercase; letter-spacing:0.06em;
+  background:var(--surface-ink); border:1px solid var(--line-ink); border-radius:999px; padding:6px 14px; flex-shrink:0;
+}
+.loop-detail-text{font-size:15.5px; color:var(--ink-soft); line-height:1.6; flex:1; min-width:240px;}
+.loop-detail-text b{color:#8A5C09; font-weight:600;}
+@media (max-width:640px){ .loop-detail{padding:26px 24px;} }
+
+/* ============ ATHLETE PROFILE DASHBOARD ============ */
+.profile-section{padding:120px 0 100px;}
+.dash{
+  background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-lg);
+  box-shadow:0 40px 80px -30px rgba(0,0,0,0.16); overflow:hidden;
+}
+.dash-topbar{display:flex; align-items:center; justify-content:space-between; padding:22px 30px; border-bottom:1px solid var(--line);}
+.dash-athlete{display:flex; align-items:center; gap:14px;}
+.dash-avatar{width:46px; height:46px; border-radius:50%; background:var(--ink); color:var(--paper); font-family:var(--font-mono); font-weight:600; font-size:14px; display:flex; align-items:center; justify-content:center;}
+.dash-athlete-name{font-family:var(--font-display); font-weight:600; font-size:16.5px;}
+.dash-athlete-meta{font-size:12.5px; color:var(--muted); font-family:var(--font-mono);}
+.dash-topbar-actions{display:flex; gap:10px;}
+@media (max-width:640px){ .dash-topbar{flex-direction:column; align-items:flex-start; gap:14px;} }
+
+.dash-body{display:grid; grid-template-columns:1fr 1.3fr; gap:0;}
+@media (max-width:860px){ .dash-body{grid-template-columns:1fr;} }
+.dash-col{padding:30px; border-right:1px solid var(--line);}
+.dash-col:last-child{border-right:none;}
+@media (max-width:860px){ .dash-col{border-right:none; border-bottom:1px solid var(--line);} }
+
+.score-block{text-align:left; margin-bottom:30px;}
+.score-label{font-family:var(--font-mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;}
+.score-value{font-family:var(--font-display); font-size:52px; font-weight:700; color:var(--ink); line-height:1;}
+.score-value span{font-size:22px; color:var(--muted); font-weight:500;}
+
+.priority-row{margin-bottom:20px;}
+.priority-top{display:flex; align-items:baseline; justify-content:space-between; margin-bottom:8px;}
+.priority-name{font-size:14px; font-weight:600;}
+.priority-nums{font-family:var(--font-mono); font-size:12.5px; color:var(--muted);}
+.priority-nums b{color:var(--good);}
+.bar-track{height:6px; border-radius:4px; background:var(--line); position:relative; overflow:hidden;}
+.bar-fill{height:100%; border-radius:4px; background:var(--signal); position:relative;}
+.bar-target{position:absolute; top:-3px; bottom:-3px; width:2px; background:var(--good);}
+
+.focus-list{list-style:none; display:flex; flex-direction:column; gap:10px; margin-top:6px;}
+.focus-list li{display:flex; align-items:center; gap:10px; font-size:14px; color:var(--ink-soft);}
+.focus-list li::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--data); flex-shrink:0;}
+
+.dash-sub-label{font-family:var(--font-mono); font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px;}
+
+.progress-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px;}
+.pstat{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-sm); padding:14px 16px;}
+.pstat-label{font-size:12px; color:var(--muted); margin-bottom:6px;}
+.pstat-value{font-family:var(--font-mono); font-size:20px; font-weight:600; color:var(--good);}
+
+.chart-wrap{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-sm); padding:20px 20px 12px;}
+.chart-legend{display:flex; gap:16px; margin-bottom:14px; font-size:11.5px; font-family:var(--font-mono); color:var(--muted); flex-wrap:wrap;}
+.chart-legend span{display:flex; align-items:center; gap:6px;}
+.chart-legend .sw{width:8px; height:8px; border-radius:2px;}
+
+.session-log{margin-top:26px;}
+.session-row{display:flex; align-items:center; gap:14px; padding:11px 0; border-top:1px solid var(--line); font-size:13px;}
+.session-row:first-child{border-top:none;}
+.session-date{font-family:var(--font-mono); color:var(--muted); font-size:11.5px; width:60px; flex-shrink:0;}
+.session-text{flex:1; color:var(--ink-soft);}
+.session-text b{color:var(--ink); font-weight:600;}
+
+/* ============ FOR TRAINERS / PROGRAMS (feature split) ============ */
+.feature-split{padding:100px 0;}
+.feature-split.alt{background:var(--paper-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+.fs-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .fs-grid{grid-template-columns:1fr; gap:44px;} }
+.fs-grid.reverse .fs-copy{order:2;}
+.fs-grid.reverse .fs-visual{order:1;}
+@media (max-width:900px){ .fs-grid.reverse .fs-copy, .fs-grid.reverse .fs-visual{order:0;} }
+
+.fs-copy h2{font-size:clamp(26px,3.4vw,36px); margin-bottom:18px; max-width:440px;}
+.fs-copy p.lead{color:var(--muted); font-size:16px; line-height:1.65; margin-bottom:28px; max-width:440px;}
+.feature-list{list-style:none; display:flex; flex-direction:column; gap:14px; margin-bottom:32px;}
+.feature-list li{display:flex; align-items:flex-start; gap:12px; font-size:14.5px; color:var(--ink-soft);}
+.feature-list li .chk{
+  width:20px; height:20px; border-radius:6px; background:var(--signal-soft); color:var(--signal); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+.feature-list li .chk svg{width:11px; height:11px;}
+
+/* trainer visual: capability grid */
+.cap-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.cap-card{background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-md); padding:20px; box-shadow:0 12px 30px -18px rgba(0,0,0,0.14);}
+.cap-card .cap-icon{width:34px; height:34px; border-radius:9px; background:var(--signal-soft); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+.cap-card .cap-icon svg{width:17px; height:17px; stroke:var(--signal);}
+.cap-card h4{font-size:14px; font-weight:600; margin-bottom:5px;}
+.cap-card p{font-size:12.5px; color:var(--muted); line-height:1.5;}
+
+/* programs visual: flow */
+.flow-diagram{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-lg); padding:32px 26px;}
+.flow-row{display:flex; align-items:center; justify-content:space-between; gap:6px; flex-wrap:wrap;}
+.flow-node{
+  background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-sm); padding:12px 14px;
+  font-size:12.5px; font-weight:600; text-align:center; flex:1; min-width:80px;
+}
+.flow-node.emph{background:var(--ink); color:var(--paper); border-color:var(--ink);}
+.flow-sep{color:var(--line); font-size:16px; padding:0 4px;}
+@media (max-width:520px){ .flow-row{flex-direction:column;} .flow-sep{transform:rotate(90deg);} .flow-node{width:100%;} }
+.flow-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:22px;}
+.flow-stat{text-align:center; padding:14px 8px; border-radius:var(--radius-sm); background:var(--paper-alt); border:1px solid var(--line);}
+.flow-stat .fv{font-family:var(--font-mono); font-size:20px; font-weight:600; color:var(--signal);}
+.flow-stat .fl{font-size:11px; color:var(--muted); margin-top:3px;}
+
+/* ============ AI WORKFLOW ============ */
+.ai-section{padding:120px 0;}
+.ai-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .ai-grid{grid-template-columns:1fr; gap:44px;} }
+.ai-copy h2{font-size:clamp(26px,3.4vw,36px); margin-bottom:18px; max-width:420px; color:var(--paper);}
+.ai-copy p{color:var(--muted-on-ink); font-size:16px; line-height:1.65; max-width:420px;}
+
+.wf{display:flex; flex-direction:column; gap:0;}
+.wf-item{display:flex; gap:18px; align-items:flex-start; position:relative; padding-bottom:34px;}
+.wf-item:last-child{padding-bottom:0;}
+.wf-item::before{
+  content:''; position:absolute; left:15px; top:34px; bottom:0; width:1px; background:var(--line-ink);
+}
+.wf-item:last-child::before{display:none;}
+.wf-dot{width:32px; height:32px; border-radius:50%; background:var(--paper-alt); border:1px solid var(--line-ink); flex-shrink:0; display:flex; align-items:center; justify-content:center; z-index:1;}
+.wf-dot.solid{background:var(--signal); border-color:var(--signal);}
+.wf-dot svg{width:14px; height:14px;}
+.wf-card{background:var(--paper-alt); border:1px solid var(--line-ink); border-radius:var(--radius-md); padding:16px 20px; flex:1;}
+.wf-tag{font-family:var(--font-mono); font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:6px;}
+.wf-text{font-size:14.5px; color:var(--ink-soft); line-height:1.55;}
+.wf-text b{color:var(--muted); font-weight:600;}
+.wf-text.quote{font-style:italic; color:var(--muted);}
+
+/* ============ PARENT EXPERIENCE ============ */
+.parent-section{padding:120px 0;}
+.parent-grid{display:grid; grid-template-columns:1fr 0.85fr; gap:64px; align-items:center;}
+@media (max-width:900px){ .parent-grid{grid-template-columns:1fr; gap:44px;} }
+.parent-copy h2{font-size:clamp(26px,3.4vw,36px); margin-bottom:18px; max-width:440px;}
+.parent-copy p.lead{color:var(--muted); font-size:16px; line-height:1.65; margin-bottom:24px; max-width:420px;}
+.parent-emotional{
+  font-family:var(--font-display); font-weight:600; font-size:18px; color:var(--ink);
+  border-left:2px solid var(--data); padding-left:18px; max-width:400px;
+}
+
+.phone{
+  max-width:300px; margin:0 auto; background:var(--paper-alt); border:1px solid var(--line); border-radius:28px;
+  padding:12px; box-shadow:0 40px 70px -28px rgba(0,0,0,0.24);
+}
+.phone-screen{background:var(--paper); border-radius:18px; padding:20px 18px; }
+.phone-head{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
+.phone-avatar{width:32px; height:32px; border-radius:50%; background:var(--ink); color:var(--paper); font-family:var(--font-mono); font-size:10.5px; font-weight:600; display:flex; align-items:center; justify-content:center;}
+.phone-head-text .n{font-size:13px; font-weight:600;}
+.phone-head-text .s{font-size:10.5px; color:var(--muted); font-family:var(--font-mono);}
+.phone-block{background:var(--paper-alt); border:1px solid var(--line); border-radius:12px; padding:14px; margin-bottom:12px;}
+.phone-block .pb-label{font-family:var(--font-mono); font-size:9.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); margin-bottom:8px;}
+.phone-block .pb-priority{font-size:12.5px; font-weight:600; margin-bottom:3px;}
+.phone-block .pb-sub{font-size:11px; color:var(--muted);}
+.phone-mini-stats{display:flex; gap:8px;}
+.phone-mini-stats div{flex:1; text-align:center; background:var(--paper-alt); border:1px solid var(--line); border-radius:9px; padding:8px 4px;}
+.phone-mini-stats .mv{font-family:var(--font-mono); font-size:14px; font-weight:600; color:var(--good);}
+.phone-mini-stats .ml{font-size:9px; color:var(--muted); margin-top:2px;}
+.phone-quote{font-size:11.5px; color:var(--ink-soft); font-style:italic; line-height:1.5; padding:12px 0 2px;}
+.phone-quote b{font-style:normal; font-weight:600; color:var(--ink);}
+
+/* ============ BIGGER VISION ============ */
+.vision-section{padding:120px 0;}
+.vision-section .section-head{max-width:600px; margin-left:auto; margin-right:auto; text-align:center;}
+.vision-section .section-head p{margin:0 auto;}
+.vision-statement{
+  text-align:center; font-family:var(--font-display); font-weight:600; font-size:clamp(20px,2.6vw,26px);
+  color:var(--paper); margin:48px auto 56px; max-width:620px; line-height:1.4;
+}
+.vision-statement .accent{color:var(--signal-ink);}
+
+.journey{display:flex; align-items:center; justify-content:center; gap:0; flex-wrap:wrap; position:relative;}
+.journey-node{
+  background:var(--paper-alt); border:1px solid var(--line-ink); border-radius:var(--radius-md); padding:14px 18px;
+  font-size:12.5px; font-weight:600; color:#8A5C09; text-align:center; min-width:110px;
+}
+.journey-node.center{background:var(--signal); border-color:var(--signal); font-family:var(--font-mono); font-size:12px; color:var(--paper);}
+.journey-sep{color:var(--line-ink); padding:0 10px; font-size:16px;}
+@media (max-width:760px){
+  .journey{flex-direction:column; gap:10px;}
+  .journey-sep{transform:rotate(90deg); padding:2px 0;}
+}
+
+/* ============ WHO IT'S FOR ============ */
+.who-section{padding:120px 0;}
+.who-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+@media (max-width:860px){ .who-grid{grid-template-columns:1fr;} }
+.who-card{
+  background:var(--paper-alt); border:1px solid var(--line); border-radius:var(--radius-lg); padding:34px 30px;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.who-card:hover{transform:translateY(-4px); box-shadow:0 24px 50px -22px rgba(0,0,0,0.18); border-color:var(--signal-ink);}
+.who-num{font-family:var(--font-mono); font-size:12px; color:var(--signal); margin-bottom:20px;}
+.who-card h3{font-size:22px; margin-bottom:12px;}
+.who-card p{color:var(--muted); font-size:14.5px; line-height:1.6;}
+
+/* ============ FINAL CTA ============ */
+.cta-section{padding:130px 0 110px; text-align:center;}
+.cta-section h2{font-size:clamp(32px,5vw,52px); max-width:700px; margin:0 auto 20px; color:var(--paper);}
+.cta-section p{color:var(--muted-on-ink); font-size:17px; max-width:520px; margin:0 auto 40px; line-height:1.65;}
+.cta-buttons{display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:16px;}
+.cta-note{font-family:var(--font-mono); font-size:12.5px; color:var(--muted-on-ink);}
+
+/* ============ FOOTER ============ */
+footer{background:var(--surface-ink); border-top:1px solid var(--line-ink); padding:36px 0;}
+.footer-inner{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;}
+.footer-logo{font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--paper);}
+.footer-logo em{font-style:normal; color:var(--signal-ink);}
+.footer-copy{font-size:12.5px; color:var(--muted-on-ink);}
+.footer-links{display:flex; gap:22px; font-size:12.5px; color:var(--muted-on-ink);}
+.footer-links a:hover{color:var(--paper);}
+</style>
+
 <body>
 
-<nav>
-  <a class="logo" href="index.html">Trainer<em>IQ</em></a>
-  <div class="nav-right">
-    <a class="nav-btn" href="#" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">Request access</a>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="logo">Trainer<em>IQ</em></a>
+    <nav class="nav-links">
+      <a href="#solution">How it works</a>
+      <a href="#trainers">For trainers</a>
+      <a href="#programs">For programs</a>
+      <a href="#vision">Vision</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#cta" class="btn btn-signal btn-sm">Request Early Access</a>
+      <button class="nav-mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
+    </div>
   </div>
-</nav>
+  <div class="wrap">
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#solution">How it works</a>
+      <a href="#trainers">For trainers</a>
+      <a href="#programs">For programs</a>
+      <a href="#vision">Vision</a>
+      <a href="#cta">Request Early Access</a>
+    </div>
+  </div>
+</header>
 
+<main id="top">
+<!-- ============ HERO ============ -->
 <section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">By invitation · Fall 2026 beta</p>
+      <h1>Every athlete deserves a <span class="accent">development plan.</span></h1>
+      <p class="sub">TrainerIQ helps coaches and trainers assess, plan, track, and continuously improve the development of every athlete they work with.</p>
 
-  <div class="hero-left">
-    <div class="eyebrow">By invitation &nbsp;·&nbsp; Trainers &amp; program coaches</div>
-
-    <div class="headline">The development plan</div>
-    <div class="headline-gold">behind every great athlete<br>and program.</div>
-
-    <div class="h-rule"></div>
-
-    <p class="bridge">
-      Whether you run one-on-one sessions or coach a full roster, the
-      business side of the work shouldn't take more energy than the
-      coaching does. <strong>Every session you log — for every
-      athlete — builds a real development plan</strong>: the goals,
-      the milestones, the next drill. Not a receipt. A roadmap
-      parents can actually see.
-    </p>
-
-    <div class="cta-group">
-      <a class="btn-primary" href="#" data-tally-open="Ekb11X" data-tally-overlay="1" data-tally-emoji-text="🏀" data-tally-emoji-animation="wave">
-        Request early access
-      </a>
-      <div class="cohort-label">
-        <span class="cohort-main">Join the beta launch</span>
-        <span class="cohort-sub">FALL 2026</span>
+      <div class="loop-row" aria-label="Assess, Plan, Train, Track, Adapt">
+        <div class="loop-step active"><span class="dot"></span><span class="label">Assess</span></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><span class="dot"></span><span class="label">Plan</span></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><span class="dot"></span><span class="label">Train</span></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><span class="dot"></span><span class="label">Track</span></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><span class="dot"></span><span class="label">Adapt</span></div>
       </div>
+
+      <div class="hero-ctas">
+        <a href="#cta" class="btn btn-signal">Request Early Access</a>
+        <a href="#solution" class="btn btn-ghost">See how it works</a>
+      </div>
+      <p class="hero-note">No credit card. Founding trainer pricing for the Fall 2026 beta.</p>
     </div>
 
-    <div class="tension">
-      The parents of your athletes have never seen a development plan like this.
+    <div class="hero-visual">
+      <div class="device-glow"></div>
+      <div class="device-card">
+        <div class="device-top">
+          <div class="dtop-athlete">
+            <div class="dtop-avatar">JW</div>
+            <div>
+              <div class="dtop-name">Jordan Williams</div>
+              <div class="dtitle">12 yrs · Guard · Development plan</div>
+            </div>
+          </div>
+          <span class="device-live"><span class="dot"></span>Live</span>
+        </div>
+
+        <div class="hero-score-row">
+          <div class="hero-score">
+            <div class="score-label">Development score</div>
+            <div class="score-value">3.4<span>/5</span></div>
+          </div>
+          <div class="hero-mini-stats">
+            <div class="hmini"><span class="hv">+18%</span><span class="hl">Shooting</span></div>
+            <div class="hmini"><span class="hv">+12%</span><span class="hl">Handling</span></div>
+            <div class="hmini"><span class="hv">+7%</span><span class="hl">Decisions</span></div>
+          </div>
+        </div>
+
+        <div class="hero-priorities">
+          <div class="dash-sub-label">Current priorities</div>
+          <div class="priority-row">
+            <div class="priority-top">
+              <span class="priority-name">Decision making</span>
+              <span class="priority-nums">2.8 → <b>4.0</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:56%"></div><div class="bar-target" style="left:80%"></div></div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-top">
+              <span class="priority-name">Ball handling</span>
+              <span class="priority-nums">3.2 → <b>4.0</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:64%"></div><div class="bar-target" style="left:80%"></div></div>
+          </div>
+          <div class="priority-row" style="margin-bottom:0;">
+            <div class="priority-top">
+              <span class="priority-name">Finishing</span>
+              <span class="priority-nums">3.7 → <b>4.2</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:74%"></div><div class="bar-target" style="left:84%"></div></div>
+          </div>
+        </div>
+
+        <div class="plan-update">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="plan-update-text">
+            <b>Jordan's development plan updated</b><br>
+            <span class="ts">Decision-making priority added · just now</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <div class="hero-right">
-    <div class="visual-stack">
-
-      <div class="gym-panel">
-        <div class="panel-label">In the gym right now</div>
-        <div class="session-row">
-          <div class="session-avatar">MJ</div>
-          <div class="session-info">
-            <div class="session-name">Marcus Johnson · 14 yrs</div>
-            <div class="session-meta">Ball handling &amp; finishing · 60 min</div>
-          </div>
-          <div class="session-status status-live">Live</div>
-        </div>
-        <div class="session-row">
-          <div class="session-avatar">AT</div>
-          <div class="session-info">
-            <div class="session-name">Amir Thompson · 12 yrs</div>
-            <div class="session-meta">Shooting mechanics · completed</div>
-          </div>
-          <div class="session-status status-done">Done</div>
-        </div>
-        <div class="session-row">
-          <div class="session-avatar">JW</div>
-          <div class="session-info">
-            <div class="session-name">Jordan Williams · 13 yrs</div>
-            <div class="session-meta">Footwork &amp; defense · 3:00 PM</div>
-          </div>
-          <div class="session-status status-done">Next</div>
-        </div>
-      </div>
-
-      <div class="plan-panel">
-        <div class="plan-header">
-          <div class="plan-icon">🎯</div>
-          <div>
-            <div class="plan-title">Amir's development plan updated</div>
-            <div class="plan-time">Updated · just now · after today's session</div>
-          </div>
-        </div>
-
-        <div class="goal-list">
-          <div class="goal-row">
-            <div class="goal-top"><div class="goal-label"></div><div class="goal-chip"></div></div>
-            <div class="goal-track"><div class="goal-fill" style="width:88%"></div></div>
-          </div>
-          <div class="goal-row">
-            <div class="goal-top"><div class="goal-label"></div><div class="goal-chip mid"></div></div>
-            <div class="goal-track"><div class="goal-fill" style="width:55%"></div></div>
-          </div>
-          <div class="goal-row">
-            <div class="goal-top"><div class="goal-label"></div><div class="goal-chip mid"></div></div>
-            <div class="goal-track"><div class="goal-fill" style="width:32%"></div></div>
-          </div>
-        </div>
-        <div class="unblur-tag">A living plan that builds after every session</div>
-      </div>
-
-    </div>
-  </div>
-
 </section>
 
-<footer>
-  <div class="f-left">
-    <span>Trainer<em>IQ</em></span>
-    <span class="f-copy">© 2026 TrainerIQ Inc.</span>
+<!-- ============ PROBLEM ============ -->
+<section class="problem">
+  <div class="wrap problem-grid">
+    <div class="problem-copy">
+      <p class="eyebrow">The problem</p>
+      <h2>Most athletes don't have a development plan. They have training sessions.</h2>
+      <p>Youth athletes often work with a school coach, an AAU coach, a private trainer, a strength coach, and a parent — sometimes all in the same month.</p>
+      <p>Each of them sees a different part of the athlete's development. There's rarely one shared system connecting those observations and goals.</p>
+      <p class="callout">TrainerIQ creates one shared development plan around the athlete.</p>
+    </div>
+    <div class="orbit">
+      <svg class="lines" viewBox="0 0 100 86" preserveAspectRatio="none">
+        <line x1="50" y1="43" x2="50" y2="8"/>
+        <line x1="50" y1="43" x2="88" y2="28"/>
+        <line x1="50" y1="43" x2="74" y2="78"/>
+        <line x1="50" y1="43" x2="26" y2="78"/>
+        <line x1="50" y1="43" x2="12" y2="28"/>
+      </svg>
+      <div class="orbit-center">Athlete</div>
+      <div class="orbit-node n1">School Coach</div>
+      <div class="orbit-node n2">AAU Coach</div>
+      <div class="orbit-node n3">Private Trainer</div>
+      <div class="orbit-node n4">Strength Coach</div>
+      <div class="orbit-node n5">Parent</div>
+    </div>
   </div>
-  <div class="f-links">
-    <a href="#">Terms</a>
-    <a href="#">Privacy</a>
-    <a href="#">Contact</a>
+</section>
+
+<!-- ============ SOLUTION ============ -->
+<section class="solution on-ink" id="solution">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow on-ink">The solution</p>
+      <h2>Turn every training session into progress.</h2>
+      <p>Five steps, running continuously, for every athlete on your roster.</p>
+    </div>
+
+    <div class="loop-track" id="loopTrack">
+      <div class="loop-item active" data-step="0">
+        <div class="loop-num">01</div>
+        <h3>Assess</h3>
+        <p>Understand where the athlete is today.</p>
+      </div>
+      <div class="loop-item" data-step="1">
+        <div class="loop-num">02</div>
+        <h3>Plan</h3>
+        <p>Identify development priorities and create measurable goals.</p>
+      </div>
+      <div class="loop-item" data-step="2">
+        <div class="loop-num">03</div>
+        <h3>Train</h3>
+        <p>Execute sessions around those priorities.</p>
+      </div>
+      <div class="loop-item" data-step="3">
+        <div class="loop-num">04</div>
+        <h3>Track</h3>
+        <p>Capture observations, outcomes, and progress.</p>
+      </div>
+      <div class="loop-item" data-step="4">
+        <div class="loop-num">05</div>
+        <h3>Adapt</h3>
+        <p>Use new information to continuously update the plan.</p>
+      </div>
+    </div>
+
+    <div class="loop-detail">
+      <div class="loop-detail-inner show" data-detail="0">
+        <span class="loop-detail-tag">Assessment</span>
+        <p class="loop-detail-text">A baseline assessment scores <b>Jordan Williams</b> across decision-making, ball handling, and finishing — the starting point every plan is built from.</p>
+      </div>
+      <div class="loop-detail-inner" data-detail="1">
+        <span class="loop-detail-tag">Development plan</span>
+        <p class="loop-detail-text">TrainerIQ turns the lowest-scoring priorities into a <b>30-day focus</b>: left-hand finishing, pick-and-roll reads, change of pace.</p>
+      </div>
+      <div class="loop-detail-inner" data-detail="2">
+        <span class="loop-detail-tag">Session</span>
+        <p class="loop-detail-text">Every session is planned around the current priorities — not a generic workout, a session built for <b>this athlete's plan</b>.</p>
+      </div>
+      <div class="loop-detail-inner" data-detail="3">
+        <span class="loop-detail-tag">Observation</span>
+        <p class="loop-detail-text">A 60-second post-session note — <b>"struggles making the second read out of pick-and-roll"</b> — is logged and attached to the plan.</p>
+      </div>
+      <div class="loop-detail-inner" data-detail="4">
+        <span class="loop-detail-tag">Update</span>
+        <p class="loop-detail-text">The plan adapts: decision-making under pressure moves up in priority, and next week's sessions shift with it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ATHLETE PROFILE ============ -->
+<section class="profile-section" id="profile">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The development plan, in product</p>
+      <h2>One athlete. One living profile.</h2>
+      <p>Every assessment, priority, session, and outcome lives in a single development record — not a folder of spreadsheets.</p>
+    </div>
+
+    <div class="dash">
+      <div class="dash-topbar">
+        <div class="dash-athlete">
+          <div class="dash-avatar">JW</div>
+          <div>
+            <div class="dash-athlete-name">Jordan Williams</div>
+            <div class="dash-athlete-meta">12 YRS · GUARD · HOOP LOVE ACADEMY</div>
+          </div>
+        </div>
+        <div class="dash-topbar-actions">
+          <a href="#cta" class="btn btn-ghost btn-sm">Full report</a>
+          <a href="#cta" class="btn btn-primary btn-sm">Log session</a>
+        </div>
+      </div>
+
+      <div class="dash-body">
+        <div class="dash-col">
+          <div class="score-block">
+            <div class="score-label">Development score</div>
+            <div class="score-value">3.4<span>/5</span></div>
+          </div>
+
+          <div class="dash-sub-label">Current priorities</div>
+          <div class="priority-row">
+            <div class="priority-top">
+              <span class="priority-name">01 — Decision making</span>
+              <span class="priority-nums">2.8 → <b>4.0</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:56%"></div><div class="bar-target" style="left:80%"></div></div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-top">
+              <span class="priority-name">02 — Ball handling</span>
+              <span class="priority-nums">3.2 → <b>4.0</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:64%"></div><div class="bar-target" style="left:80%"></div></div>
+          </div>
+          <div class="priority-row">
+            <div class="priority-top">
+              <span class="priority-name">03 — Finishing</span>
+              <span class="priority-nums">3.7 → <b>4.2</b></span>
+            </div>
+            <div class="bar-track"><div class="bar-fill" style="width:74%"></div><div class="bar-target" style="left:84%"></div></div>
+          </div>
+
+          <div class="dash-sub-label" style="margin-top:26px;">Current 30-day focus</div>
+          <ul class="focus-list">
+            <li>Left-hand finishing</li>
+            <li>Pick-and-roll reads</li>
+            <li>Change of pace</li>
+          </ul>
+        </div>
+
+        <div class="dash-col">
+          <div class="dash-sub-label">Progress · last 90 days</div>
+          <div class="progress-stats">
+            <div class="pstat"><div class="pstat-label">Shooting</div><div class="pstat-value">+18%</div></div>
+            <div class="pstat"><div class="pstat-label">Ball handling</div><div class="pstat-value">+12%</div></div>
+            <div class="pstat"><div class="pstat-label">Decision making</div><div class="pstat-value">+7%</div></div>
+          </div>
+
+          <div class="chart-wrap">
+            <div class="chart-legend">
+              <span><i class="sw" style="background:var(--signal)"></i>Shooting</span>
+              <span><i class="sw" style="background:var(--ink-soft)"></i>Ball handling</span>
+              <span><i class="sw" style="background:var(--good)"></i>Decision making</span>
+            </div>
+            <svg viewBox="0 0 320 110" width="100%" height="110" preserveAspectRatio="none">
+              <line x1="0" y1="27" x2="320" y2="27" stroke="var(--line)" stroke-width="1"/>
+              <line x1="0" y1="55" x2="320" y2="55" stroke="var(--line)" stroke-width="1"/>
+              <line x1="0" y1="83" x2="320" y2="83" stroke="var(--line)" stroke-width="1"/>
+              <polyline points="0,85 40,80 80,74 120,70 160,58 200,50 240,40 280,30 320,22" fill="none" stroke="var(--signal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="0,90 40,88 80,84 120,82 160,76 200,70 240,64 280,58 320,52" fill="none" stroke="var(--ink-soft)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+              <polyline points="0,95 40,94 80,93 120,92 160,90 200,89 240,86 280,84 320,80" fill="none" stroke="var(--good)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div class="session-log">
+            <div class="dash-sub-label" style="margin-bottom:10px;">Recent sessions</div>
+            <div class="session-row"><span class="session-date">Aug 18</span><span class="session-text"><b>Finishing</b> — left-hand layups, floater series</span></div>
+            <div class="session-row"><span class="session-date">Aug 15</span><span class="session-text"><b>Decision making</b> — pick-and-roll reads vs. live defense</span></div>
+            <div class="session-row"><span class="session-date">Aug 12</span><span class="session-text"><b>Ball handling</b> — change of pace, tight space control</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOR TRAINERS ============ -->
+<section class="feature-split" id="trainers">
+  <div class="wrap fs-grid">
+    <div class="fs-copy">
+      <p class="eyebrow">For trainers &amp; coaches</p>
+      <h2>Spend less time managing athletes. More time developing them.</h2>
+      <p class="lead">TrainerIQ gives every athlete you work with a clear development path — while giving you the tools to manage that development at scale.</p>
+      <a href="https://tally.so/r/b51Ak0" class="btn btn-signal">Become a Founding Trainer</a>
+    </div>
+    <div class="fs-visual">
+      <div class="cap-grid">
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0116 0v1"/></svg></div>
+          <h4>Athlete profiles</h4>
+          <p>One record per athlete, built over time.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <h4>Assessments</h4>
+          <p>Score where the athlete is today.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 4 3 5-6"/></svg></div>
+          <h4>Development plans</h4>
+          <p>Goals and priorities, always current.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg></div>
+          <h4>Session planning</h4>
+          <p>Sessions built around priorities.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20l9-9-9-9M3 20l9-9-9-9"/></svg></div>
+          <h4>Parent communication</h4>
+          <p>Updates that reach parents automatically.</p>
+        </div>
+        <div class="cap-card">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+          <h4>AI recommendations</h4>
+          <p>Suggested next priorities and drills.</p>
+        </div>
+        <div class="cap-card" style="grid-column: span 2;">
+          <div class="cap-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 15l2 2 4-4"/></svg></div>
+          <h4>Scheduling &amp; payments</h4>
+          <p>Availability, booking, and getting paid — handled.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOR PROGRAMS ============ -->
+<section class="feature-split alt" id="programs">
+  <div class="wrap fs-grid reverse">
+    <div class="fs-copy">
+      <p class="eyebrow">For youth sports programs</p>
+      <h2>Create a consistent development system across your entire program.</h2>
+      <p class="lead">Built for academies, AAU programs, camps, schools, and community organizations managing many coaches and hundreds of athletes.</p>
+      <ul class="feature-list">
+        <li><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Standardized assessments across every coach</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>One shared development methodology</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Program-wide analytics and reporting</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Visibility for every parent, at every level</li>
+        <li><span class="chk"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12L10 18L20 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Roster management across coaches and athletes</li>
+      </ul>
+      <a href="https://tally.so/r/xX864v" class="btn btn-ghost">Talk to Us About Your Program</a>
+    </div>
+    <div class="fs-visual">
+      <div class="flow-diagram">
+        <div class="flow-row">
+          <div class="flow-node emph">Program</div>
+          <span class="flow-sep">→</span>
+          <div class="flow-node">Coaches</div>
+          <span class="flow-sep">→</span>
+          <div class="flow-node">Trainers</div>
+          <span class="flow-sep">→</span>
+          <div class="flow-node">Athletes</div>
+          <span class="flow-sep">→</span>
+          <div class="flow-node">Parents</div>
+        </div>
+        <div class="flow-stats">
+          <div class="flow-stat"><div class="fv">340+</div><div class="fl">Athletes tracked</div></div>
+          <div class="flow-stat"><div class="fv">18</div><div class="fl">Coaches, one system</div></div>
+          <div class="flow-stat"><div class="fv">100%</div><div class="fl">Assessment coverage</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AI ============ -->
+<section class="ai-section on-ink">
+  <div class="wrap ai-grid">
+    <div class="ai-copy">
+      <p class="eyebrow on-ink">AI that knows the athlete</p>
+      <h2>The engine behind a smarter development plan.</h2>
+      <p>TrainerIQ learns from assessments, training history, coach observations, and athlete feedback to help coaches make better development decisions.</p>
+    </div>
+    <div class="wf">
+      <div class="wf-item">
+        <div class="wf-dot"><svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="wf-card">
+          <div class="wf-tag">Coach observation</div>
+          <p class="wf-text quote">"Struggles making the second read out of pick-and-roll."</p>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-dot solid"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div class="wf-card">
+          <div class="wf-tag">TrainerIQ identifies</div>
+          <p class="wf-text"><b>Development priority: decision-making under pressure</b></p>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-dot"><svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="wf-card">
+          <div class="wf-tag">TrainerIQ recommends</div>
+          <p class="wf-text">3 training focuses for the next block of sessions.</p>
+        </div>
+      </div>
+      <div class="wf-item">
+        <div class="wf-dot"><svg viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12L10 18L20 6"/></svg></div>
+        <div class="wf-card">
+          <div class="wf-tag">After several sessions</div>
+          <p class="wf-text">Jordan's development plan updates based on new observations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARENT EXPERIENCE ============ -->
+<section class="parent-section">
+  <div class="wrap parent-grid">
+    <div class="phone">
+      <div class="phone-screen">
+        <div class="phone-head">
+          <div class="phone-avatar">JW</div>
+          <div class="phone-head-text">
+            <div class="n">Jordan's development plan</div>
+            <div class="s">Updated Aug 18</div>
+          </div>
+        </div>
+        <div class="phone-block">
+          <div class="pb-label">Current priority</div>
+          <div class="pb-priority">Decision making under pressure</div>
+          <div class="pb-sub">2.8 → target 4.0</div>
+        </div>
+        <div class="phone-mini-stats">
+          <div><div class="mv">+18%</div><div class="ml">Shooting</div></div>
+          <div><div class="mv">+12%</div><div class="ml">Handling</div></div>
+          <div><div class="mv">+7%</div><div class="ml">Decisions</div></div>
+        </div>
+        <div class="phone-quote">"Left-hand finishing is coming along — <b>ready to add pick-and-roll reads</b> next block."</div>
+        <div class="phone-block" style="margin-top:6px;">
+          <div class="pb-label">Next assessment</div>
+          <div class="pb-priority" style="font-size:12px;">Sept 6 · full re-score</div>
+        </div>
+      </div>
+    </div>
+    <div class="parent-copy">
+      <p class="eyebrow">For athletes &amp; parents</p>
+      <h2>Know what your athlete is working on — and see the progress.</h2>
+      <p class="lead">Current priorities, 90-day progress, upcoming goals, trainer feedback, and the next assessment — all in one place, updated after every session.</p>
+      <p class="parent-emotional">Parents don't have to guess whether training is working.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BIGGER VISION ============ -->
+<section class="vision-section on-ink" id="vision">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow on-ink">The bigger vision</p>
+      <h2>One athlete. One development journey.</h2>
+      <p>Across a school gym, an AAU tournament, a private session, and a summer camp — Jordan is one athlete, developing continuously.</p>
+    </div>
+
+    <div class="journey">
+      <div class="journey-node">School Coach</div>
+      <span class="journey-sep">→</span>
+      <div class="journey-node">AAU Coach</div>
+      <span class="journey-sep">→</span>
+      <div class="journey-node center">Jordan Williams</div>
+      <span class="journey-sep">→</span>
+      <div class="journey-node">Private Trainer</div>
+      <span class="journey-sep">→</span>
+      <div class="journey-node">Summer Camp</div>
+    </div>
+
+    <p class="vision-statement">Wherever an athlete trains, <span class="accent">their development plan travels with them.</span></p>
+  </div>
+</section>
+
+<!-- ============ WHO IT'S FOR ============ -->
+<section class="who-section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Who it's for</p>
+      <h2>Three roles. One shared plan.</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-num">01</div>
+        <h3>Trainers</h3>
+        <p>Develop more athletes. Build stronger relationships — with a system that manages the plan so you can focus on the work.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-num">02</div>
+        <h3>Programs</h3>
+        <p>Create a consistent development system across your organization, from your newest coach to your most tenured trainer.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-num">03</div>
+        <h3>Athletes &amp; Parents</h3>
+        <p>Know what you're working toward — and see the progress, updated after every session.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="cta-section on-ink" id="cta">
+  <div class="wrap">
+    <p class="eyebrow on-ink" style="justify-content:center;">Fall 2026 beta</p>
+    <h2>Start building better athletes.</h2>
+    <p>TrainerIQ is currently inviting a limited number of trainers and youth sports programs into the Fall 2026 beta.</p>
+    <div class="cta-buttons">
+      <a href="https://tally.so/r/b51Ak0" class="btn btn-signal">I'm a Trainer</a>
+      <a href="https://tally.so/r/xX864v" class="btn btn-ghost on-ink">I'm a Program</a>
+    </div>
+    <p class="cta-note">Apply for Early Access · Founding trainer pricing · No credit card</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-logo">Trainer<em>IQ</em></div>
+    <p class="footer-copy">© 2026 TrainerIQ Inc.</p>
+    <div class="footer-links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Contact</a>
+    </div>
   </div>
 </footer>
 
-<script async src="https://tally.so/widgets/embed.js"></script>
+<script>
+// Mobile menu toggle
+const toggle = document.getElementById('mobileToggle');
+const menu = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => {
+  const isOpen = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', isOpen);
+});
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menu.classList.remove('open');
+  toggle.setAttribute('aria-expanded', 'false');
+}));
+
+// Solution loop interactivity — cycles automatically, click to pin
+(function(){
+  const items = document.querySelectorAll('.loop-item');
+  const details = document.querySelectorAll('.loop-detail-inner');
+  let current = 0;
+  let auto = true;
+  let timer;
+
+  function setStep(i){
+    items.forEach(it => it.classList.remove('active'));
+    details.forEach(d => d.classList.remove('show'));
+    items[i].classList.add('active');
+    document.querySelector(`.loop-detail-inner[data-detail="${i}"]`).classList.add('show');
+    current = i;
+  }
+
+  function startAuto(){
+    timer = setInterval(() => {
+      if(!auto) return;
+      setStep((current + 1) % items.length);
+    }, 3200);
+  }
+
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      auto = false;
+      setStep(parseInt(item.dataset.step));
+    });
+  });
+
+  startAuto();
+})();
+
+// Scroll reveal
+(function(){
+  const revealEls = document.querySelectorAll('.dash, .who-card, .cap-card, .flow-diagram, .phone, .orbit, .wf-item');
+  revealEls.forEach(el => { el.style.opacity = 0; el.style.transform = 'translateY(16px)'; el.style.transition = 'opacity .6s ease, transform .6s ease'; });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  revealEls.forEach(el => io.observe(el));
+})();
+</script>
 
 </body>
 </html>
